@@ -11,6 +11,9 @@
 
 #import "CFObject.h"
 
+#import "CFCoreDataManager.h"
+#import "CFCoreDataRequest.h"
+
 #import "CFProgress.h"
 
 #import "CFTask.h"
