@@ -47,22 +47,7 @@
     NSFetchRequest *request = [self fetchRequestWithWhereQuery:whereQuery whereParameters:whereParameters];
     
     // ソート
-    if (sortColumns != nil && [sortColumns count] > 0)
-    {
-        NSMutableArray *sortDescriptors = [NSMutableArray arrayWithCapacity:1];
-        NSSortDescriptor *sort;
-        for (NSDictionary *sortColumn in sortColumns)
-        {
-            for (NSString *keyString in sortColumn)
-            {
-                sort = [NSSortDescriptor sortDescriptorWithKey:keyString
-                                                     ascending:[(NSNumber *)[sortColumn objectForKey:keyString] boolValue]
-                        ];
-                [sortDescriptors addObject:sort];
-            }
-        }
-        [request setSortDescriptors:sortDescriptors];
-    }
+    [request setSortDescriptors:[self sortDescriptorsWithColumns:sortColumns]];
     
     // フェッチオフセット
     [request setFetchOffset:fetchOffset];
@@ -125,20 +110,7 @@
     NSFetchRequest *request = [self fetchRequestWithWhereQuery:whereQuery whereParameters:whereParameters];
     
     // ソート
-    if (sortColumns != nil && [sortColumns count] > 0)
-    {
-        NSMutableArray *sortDescriptors = [NSMutableArray arrayWithCapacity:1];
-        NSSortDescriptor *sort;
-        for (NSDictionary *sortColumn in sortColumns)
-        {
-            for (NSString *keyString in sortColumn)
-            {
-                sort = [NSSortDescriptor sortDescriptorWithKey:keyString ascending:[(NSNumber *)[sortColumn objectForKey:keyString] boolValue]];
-                [sortDescriptors addObject:sort];
-            }
-        }
-        [request setSortDescriptors:sortDescriptors];
-    }
+    [request setSortDescriptors:[self sortDescriptorsWithColumns:sortColumns]];
     
     // 実取得して返却
     return [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[self objectContext] sectionNameKeyPath:sectionNameKeyPath cacheName:nil];
@@ -240,6 +212,30 @@
     [request setPredicate:predicate];
     
     return request;
+}
+
+// NSSortDescriptorの生成
+- (NSMutableArray<NSSortDescriptor *> *) sortDescriptorsWithColumns:(NSArray *)sortColumns
+{
+    if (sortColumns == nil)
+    {
+        return nil;
+    }
+    if ([sortColumns count] == 0)
+    {
+        return nil;
+    }
+    
+    //　ソート生成
+    NSMutableArray<NSSortDescriptor *> *sortDescriptors = [@[] mutableCopy];
+    for (NSDictionary *sortColumn in sortColumns)
+    {
+        NSString *sortKey = [[sortColumn allKeys] objectAtIndex:0];
+        NSNumber *ascending = [[sortColumn allValues] objectAtIndex:0];
+        
+        [sortDescriptors addObject:[NSSortDescriptor sortDescriptorWithKey:sortKey ascending:ascending]];
+    }
+    return sortDescriptors;
 }
 
 @end
