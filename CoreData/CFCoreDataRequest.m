@@ -15,6 +15,7 @@
 // property
 //
 @property NSManagedObjectContext *objectContext;
+@property NSString *entityName;
 
 @end
 
@@ -28,27 +29,22 @@
 //
 
 // 初期化
-- (instancetype) initWithContext:(NSManagedObjectContext *)context
+- (instancetype) initWithContext:(NSManagedObjectContext *)context entityName:(NSString *)entityName
 {
     self = [super init];
     if (self != nil)
     {
         [self setObjectContext:context];
+        [self setEntityName:entityName];
     }
     return self;
 }
 
 // データ取得
-- (NSArray *) requestWithEntityName:(NSString *)entityName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters sortColumns:(NSArray *)sortColumns fetchLimit:(NSInteger)fetchLimit fetchOffset:(NSInteger)fetchOffset;
+- (NSArray *) requestWithWhereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters sortColumns:(NSArray *)sortColumns fetchLimit:(NSInteger)fetchLimit fetchOffset:(NSInteger)fetchOffset;
 {
-    // 座席Entityを取得
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:[self objectContext]];
-    [request setEntity:entity];
-    
-    // 取得条件
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:whereQuery argumentArray:whereParameters];
-    [request setPredicate:predicate];
+    // リクエスト生成
+    NSFetchRequest *request = [self fetchRequestWithWhereQuery:whereQuery whereParameters:whereParameters];
     
     // ソート
     if (sortColumns != nil && [sortColumns count] > 0)
@@ -95,15 +91,15 @@
 }
 
 // データ取得(1件)
-- (NSManagedObject *) objectWithEntityName:(NSString *)entityName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
+- (NSManagedObject *) objectWithWhereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
 {
-    return [self objectWithEntityName:entityName whereQuery:whereQuery whereParameters:whereParameters sortColumns:nil];
+    return [self objectWithWhereQuery:whereQuery whereParameters:whereParameters sortColumns:nil];
 }
 
 // データ取得(1件)
-- (NSManagedObject *) objectWithEntityName:(NSString *)entityName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters sortColumns:(NSArray *)sortColumns
+- (NSManagedObject *) objectWithWhereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters sortColumns:(NSArray *)sortColumns
 {
-    NSArray *results = [self requestWithEntityName:entityName whereQuery:whereQuery whereParameters:whereParameters sortColumns:sortColumns fetchLimit:1 fetchOffset:0];
+    NSArray *results = [self requestWithWhereQuery:whereQuery whereParameters:whereParameters sortColumns:sortColumns fetchLimit:1 fetchOffset:0];
     if (results != nil)
     {
         return [results objectAtIndex:0];
@@ -112,27 +108,21 @@
 }
 
 // データ取得(全件)
-- (NSArray *) listWithEntityName:(NSString *)entityName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters sortColumns:(NSArray *)sortColumns
+- (NSArray *) listWithWhereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters sortColumns:(NSArray *)sortColumns
 {
-    return [self requestWithEntityName:entityName whereQuery:whereQuery whereParameters:whereParameters sortColumns:sortColumns fetchLimit:0 fetchOffset:0];
+    return [self requestWithWhereQuery:whereQuery whereParameters:whereParameters sortColumns:sortColumns fetchLimit:0 fetchOffset:0];
 }
 
 // フェッチ取得
-- (NSFetchedResultsController *) fetchWithEntityName:(NSString *)entityName sectionNameKeyPath:(NSString *)sectionNameKeyPath cacheName:(NSString *)cacheName refreshCache:(BOOL)refrechCache whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters sortColumns:(NSArray *)sortColumns
+- (NSFetchedResultsController *) fetchWithSectionNameKeyPath:(NSString *)sectionNameKeyPath cacheName:(NSString *)cacheName refreshCache:(BOOL)refrechCache whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters sortColumns:(NSArray *)sortColumns
 {
     if (whereParameters != nil && ([whereParameters isKindOfClass:[NSArray class]] == YES || [whereParameters isKindOfClass:[NSMutableArray class]] == YES) && [whereParameters count] == 0)
     {
         whereParameters = nil;
     }
     
-    // 座席Entityを取得
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:[self objectContext]];
-    [request setEntity:entity];
-    
-    // 取得条件
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:whereQuery argumentArray:whereParameters];
-    [request setPredicate:predicate];
+    // リクエスト生成
+    NSFetchRequest *request = [self fetchRequestWithWhereQuery:whereQuery whereParameters:whereParameters];
     
     // ソート
     if (sortColumns != nil && [sortColumns count] > 0)
@@ -155,39 +145,39 @@
 }
 
 // count取得(1件)
-- (NSNumber *) countWithEntityName:(NSString *)entityName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
+- (NSNumber *) countWithColumnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
 {
-    return [self numberFunctionWithEntityName:entityName functionName:@"count:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters groupby:nil];
+    return [self numberFunctionWithFunctionName:@"count:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters groupby:nil];
 }
 
 // count取得(1件)(group by)
-- (NSNumber *) countWithEntityName:(NSString *)entityName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters groupby:(NSArray *)groupby
+- (NSNumber *) countWithColumnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters groupby:(NSArray *)groupby
 {
-    return [self numberFunctionWithEntityName:entityName functionName:@"count:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters groupby:groupby];
+    return [self numberFunctionWithFunctionName:@"count:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters groupby:groupby];
 }
 
 // max取得(1件)
-- (NSNumber *) maxWithEntityName:(NSString *)entityName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
+- (NSNumber *) maxWithColumnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
 {
-    return [self numberFunctionWithEntityName:entityName functionName:@"max:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters groupby:nil];
+    return [self numberFunctionWithFunctionName:@"max:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters groupby:nil];
 }
 
 // min取得(1件)
-- (NSNumber *) minWithEntityName:(NSString *)entityName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
+- (NSNumber *) minWithColumnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
 {
-    return [self numberFunctionWithEntityName:entityName functionName:@"min:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters groupby:nil];
+    return [self numberFunctionWithFunctionName:@"min:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters groupby:nil];
 }
 
 // average取得(1件)
-- (NSNumber *) averageWithEntityName:(NSString *)entityName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
+- (NSNumber *) averageWithColumnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
 {
-    return [self numberFunctionWithEntityName:entityName functionName:@"average:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters groupby:nil];
+    return [self numberFunctionWithFunctionName:@"average:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters groupby:nil];
 }
 
 // sum取得(1件)
-- (NSNumber *) sumWithEntityName:(NSString *)entityName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
+- (NSNumber *) sumWithColumnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
 {
-    return [self numberFunctionWithEntityName:entityName functionName:@"sum:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters groupby:nil];
+    return [self numberFunctionWithFunctionName:@"sum:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters groupby:nil];
 }
 
 
@@ -197,15 +187,11 @@
 // private
 //
 
-// 件数取得(1件)
-- (NSNumber *) numberFunctionWithEntityName:(NSString *)entityName functionName:(NSString *)functionName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters groupby:(NSArray *)groupby
+// 数値functionで取得(1件)
+- (NSNumber *) numberFunctionWithFunctionName:(NSString *)functionName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters groupby:(NSArray *)groupby
 {
-    // リクエスト
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    
-    // 取得用 Entity 生成
-    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:[self objectContext]];
-    [request setEntity:entity];
+    // リクエスト生成
+    NSFetchRequest *request = [self fetchRequestWithWhereQuery:whereQuery whereParameters:whereParameters];
     
     // expression
     NSExpression *keyPathExpression = [NSExpression expressionForKeyPath:columnName];
@@ -226,10 +212,6 @@
         [request setPropertiesToGroupBy:groupby];
     }
     
-    // 取得条件
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:whereQuery argumentArray:whereParameters];
-    [request setPredicate:predicate];
-    
     // データ取得
     NSError *error;
     NSArray *results = [[self objectContext] executeFetchRequest:request error:&error];
@@ -241,6 +223,23 @@
         return @0;
     }
     return [[results objectAtIndex:0] valueForKey:@"result"];
+}
+
+// NSFetchRequestの生成
+- (NSFetchRequest *) fetchRequestWithWhereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
+{
+    // リクエスト
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    
+    // 取得用 Entity 生成
+    NSEntityDescription *entity = [NSEntityDescription entityForName:[self entityName] inManagedObjectContext:[self objectContext]];
+    [request setEntity:entity];
+    
+    // 取得条件
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:whereQuery argumentArray:whereParameters];
+    [request setPredicate:predicate];
+    
+    return request;
 }
 
 @end
