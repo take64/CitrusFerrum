@@ -1,12 +1,14 @@
 //
 //  CFCoreDataRequest.m
-//  ChinottoPod
+//  CitrusFerrum
 //
 //  Created by kouhei.takemoto on 2018/08/08.
 //  Copyright © 2018年 citrus.tk. All rights reserved.
 //
 
 #import "CFCoreDataRequest.h"
+
+#import "CFCoreDataCondition.h"
 
 @interface CFCoreDataRequest()
 
@@ -41,22 +43,23 @@
 }
 
 // データ取得
-- (NSArray *) requestWithWhereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters sortColumns:(NSArray *)sortColumns fetchLimit:(NSInteger)fetchLimit fetchOffset:(NSInteger)fetchOffset;
+- (NSArray *) requestWithCondition:(CFCoreDataCondition * __nonnull)condition
 {
     // リクエスト生成
-    NSFetchRequest *request = [self fetchRequestWithWhereQuery:whereQuery whereParameters:whereParameters];
+    NSFetchRequest *request = [self fetchRequestWithWhereQuery:[condition query] whereParameters:[condition parameters]];
     
     // ソート
-    [request setSortDescriptors:[self sortDescriptorsWithColumns:sortColumns]];
-    
-    // フェッチオフセット
-    [request setFetchOffset:fetchOffset];
+    [request setSortDescriptors:[condition convertSortDescriptors]];
     
     // フェッチリミット
-    if (fetchLimit > 0)
+    if ([condition limit] != nil)
     {
-        [request setFetchLimit:fetchLimit];
+        [request setFetchLimit:[[condition limit] integerValue]];
     }
+    
+    // フェッチオフセット
+    [request setFetchOffset:[[condition offset] integerValue]];
+    
     
     // 実取得
     NSError *error;
@@ -75,16 +78,13 @@
     return results;
 }
 
-// データ取得(1件)
-- (NSManagedObject *) objectWithWhereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
-{
-    return [self objectWithWhereQuery:whereQuery whereParameters:whereParameters sortColumns:nil];
-}
 
 // データ取得(1件)
-- (NSManagedObject *) objectWithWhereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters sortColumns:(NSArray *)sortColumns
+- (NSManagedObject *) objectWithCondition:(CFCoreDataCondition * __nonnull)condition
 {
-    NSArray *results = [self requestWithWhereQuery:whereQuery whereParameters:whereParameters sortColumns:sortColumns fetchLimit:1 fetchOffset:0];
+    [condition setLimit:@1];
+    [condition setOffset:@0];
+    NSArray *results = [self requestWithCondition:condition];
     if (results != nil)
     {
         return [results objectAtIndex:0];
@@ -93,63 +93,52 @@
 }
 
 // データ取得(全件)
-- (NSArray *) listWithWhereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters sortColumns:(NSArray *)sortColumns
+- (NSArray *) listWithCondition:(CFCoreDataCondition * __nonnull)condition
 {
-    return [self requestWithWhereQuery:whereQuery whereParameters:whereParameters sortColumns:sortColumns fetchLimit:0 fetchOffset:0];
+    return [self requestWithCondition:condition];
 }
 
 // フェッチ取得
-- (NSFetchedResultsController *) fetchWithSectionNameKeyPath:(NSString *)sectionNameKeyPath cacheName:(NSString *)cacheName refreshCache:(BOOL)refrechCache whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters sortColumns:(NSArray *)sortColumns
+- (NSFetchedResultsController *) fetchWithSectionNameKeyPath:(NSString *)sectionNameKeyPath cacheName:(NSString *)cacheName refreshCache:(BOOL)refrechCache condition:(CFCoreDataCondition * __nonnull)condition
 {
-    if (whereParameters != nil && ([whereParameters isKindOfClass:[NSArray class]] == YES || [whereParameters isKindOfClass:[NSMutableArray class]] == YES) && [whereParameters count] == 0)
-    {
-        whereParameters = nil;
-    }
-    
     // リクエスト生成
-    NSFetchRequest *request = [self fetchRequestWithWhereQuery:whereQuery whereParameters:whereParameters];
+    NSFetchRequest *request = [self fetchRequestWithWhereQuery:[condition query] whereParameters:[condition parameters]];
     
     // ソート
-    [request setSortDescriptors:[self sortDescriptorsWithColumns:sortColumns]];
+    [request setSortDescriptors:[condition convertSortDescriptors]];
     
     // 実取得して返却
-    return [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[self objectContext] sectionNameKeyPath:sectionNameKeyPath cacheName:nil];
+    return [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[self objectContext] sectionNameKeyPath:sectionNameKeyPath cacheName:cacheName];
 }
 
 // count取得(1件)
-- (NSNumber *) countWithColumnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
+- (NSNumber *) countWithColumnName:(NSString *)columnName condition:(CFCoreDataCondition * __nonnull)condition
 {
-    return [self numberFunctionWithFunctionName:@"count:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters groupby:nil];
-}
-
-// count取得(1件)(group by)
-- (NSNumber *) countWithColumnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters groupby:(NSArray *)groupby
-{
-    return [self numberFunctionWithFunctionName:@"count:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters groupby:groupby];
+    return [self numberFunctionWithFunctionName:@"count:" columnName:columnName condiion:condition];
 }
 
 // max取得(1件)
-- (NSNumber *) maxWithColumnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
+- (NSNumber *) maxWithColumnName:(NSString *)columnName condition:(CFCoreDataCondition * __nonnull)condition
 {
-    return [self numberFunctionWithFunctionName:@"max:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters groupby:nil];
+    return [self numberFunctionWithFunctionName:@"max:" columnName:columnName condiion:condition];
 }
 
 // min取得(1件)
-- (NSNumber *) minWithColumnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
+- (NSNumber *) minWithColumnName:(NSString *)columnName condition:(CFCoreDataCondition * __nonnull)condition
 {
-    return [self numberFunctionWithFunctionName:@"min:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters groupby:nil];
+    return [self numberFunctionWithFunctionName:@"min:" columnName:columnName condiion:condition];
 }
 
 // average取得(1件)
-- (NSNumber *) averageWithColumnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
+- (NSNumber *) averageWithColumnName:(NSString *)columnName condition:(CFCoreDataCondition * __nonnull)condition
 {
-    return [self numberFunctionWithFunctionName:@"average:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters groupby:nil];
+    return [self numberFunctionWithFunctionName:@"average:" columnName:columnName condiion:condition];
 }
 
 // sum取得(1件)
-- (NSNumber *) sumWithColumnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
+- (NSNumber *) sumWithColumnName:(NSString *)columnName condition:(CFCoreDataCondition * __nonnull)condition
 {
-    return [self numberFunctionWithFunctionName:@"sum:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters groupby:nil];
+    return [self numberFunctionWithFunctionName:@"sum:" columnName:columnName condiion:condition];
 }
 
 
@@ -160,10 +149,10 @@
 //
 
 // 数値functionで取得(1件)
-- (NSNumber *) numberFunctionWithFunctionName:(NSString *)functionName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters groupby:(NSArray *)groupby
+- (NSNumber *) numberFunctionWithFunctionName:(NSString *)functionName columnName:(NSString *)columnName condiion:(CFCoreDataCondition * __nonnull)condition
 {
     // リクエスト生成
-    NSFetchRequest *request = [self fetchRequestWithWhereQuery:whereQuery whereParameters:whereParameters];
+    NSFetchRequest *request = [self fetchRequestWithWhereQuery:[condition query] whereParameters:[condition parameters]];
     
     // expression
     NSExpression *keyPathExpression = [NSExpression expressionForKeyPath:columnName];
@@ -179,9 +168,9 @@
     [request setPropertiesToFetch:[NSArray arrayWithObject:expressionDescription]];
     
     // groupby
-    if (groupby != nil)
+    if ([condition groupby] != nil)
     {
-        [request setPropertiesToGroupBy:groupby];
+        [request setPropertiesToGroupBy:[condition groupby]];
     }
     
     // データ取得
@@ -212,30 +201,6 @@
     [request setPredicate:predicate];
     
     return request;
-}
-
-// NSSortDescriptorの生成
-- (NSMutableArray<NSSortDescriptor *> *) sortDescriptorsWithColumns:(NSArray *)sortColumns
-{
-    if (sortColumns == nil)
-    {
-        return nil;
-    }
-    if ([sortColumns count] == 0)
-    {
-        return nil;
-    }
-    
-    //　ソート生成
-    NSMutableArray<NSSortDescriptor *> *sortDescriptors = [@[] mutableCopy];
-    for (NSDictionary *sortColumn in sortColumns)
-    {
-        NSString *sortKey = [[sortColumn allKeys] objectAtIndex:0];
-        NSNumber *ascending = [[sortColumn allValues] objectAtIndex:0];
-        
-        [sortDescriptors addObject:[NSSortDescriptor sortDescriptorWithKey:sortKey ascending:ascending]];
-    }
-    return sortDescriptors;
 }
 
 @end

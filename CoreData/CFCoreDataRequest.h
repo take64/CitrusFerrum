@@ -1,6 +1,6 @@
 //
 //  CFCoreDataRequest.h
-//  ChinottoPod
+//  CitrusFerrum
 //
 //  Created by kouhei.takemoto on 2018/08/08.
 //  Copyright © 2018年 citrus.tk. All rights reserved.
@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+
+@class CFCoreDataCondition;
 
 @interface CFCoreDataRequest : NSObject
 
@@ -20,36 +22,30 @@
 - (instancetype) initWithContext:(NSManagedObjectContext *)context entityName:(NSString *)entityName;
 
 // データ取得
-- (NSArray *) requestWithWhereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters sortColumns:(NSArray *)sortColumns fetchLimit:(NSInteger)fetchLimit fetchOffset:(NSInteger)fetchOffset;
+- (NSArray *) requestWithCondition:(CFCoreDataCondition * __nonnull)condition;
 
 // データ取得(1件)
-- (NSManagedObject *) objectWithWhereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters;
-
-// データ取得(1件)
-- (NSManagedObject *) objectWithWhereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters sortColumns:(NSArray *)sortColumns;
+- (NSManagedObject *) objectWithCondition:(CFCoreDataCondition * __nonnull)condition;
 
 // データ取得(全件)
-- (NSArray *) listWithWhereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters sortColumns:(NSArray *)sortColumns;
+- (NSArray *) listWithCondition:(CFCoreDataCondition * __nonnull)condition;
 
 // フェッチ取得
-- (NSFetchedResultsController *) fetchWithSectionNameKeyPath:(NSString *)sectionNameKeyPath cacheName:(NSString *)cacheName refreshCache:(BOOL)refrechCache whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters sortColumns:(NSArray *)sortColumns;
+- (NSFetchedResultsController *) fetchWithSectionNameKeyPath:(NSString *)sectionNameKeyPath cacheName:(NSString *)cacheName refreshCache:(BOOL)refrechCache condition:(CFCoreDataCondition * __nonnull)condition;
 
 // count取得(1件)
-- (NSNumber *) countWithColumnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters;
-
-// count取得(1件)(group by)
-- (NSNumber *) countWithColumnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters groupby:(NSArray *)groupby;
+- (NSNumber *) countWithColumnName:(NSString *)columnName condition:(CFCoreDataCondition * __nonnull)condition;
 
 // max取得(1件)
-- (NSNumber *) maxWithColumnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters;
+- (NSNumber *) maxWithColumnName:(NSString *)columnName condition:(CFCoreDataCondition * __nonnull)condition;
 
 // min取得(1件)
-- (NSNumber *) minWithColumnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters;
+- (NSNumber *) minWithColumnName:(NSString *)columnName condition:(CFCoreDataCondition * __nonnull)condition;
 
 // average取得(1件)
-- (NSNumber *) averageWithColumnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters;
+- (NSNumber *) averageWithColumnName:(NSString *)columnName condition:(CFCoreDataCondition * __nonnull)condition;
 
 // sum取得(1件)
-- (NSNumber *) sumWithColumnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters;
+- (NSNumber *) sumWithColumnName:(NSString *)columnName condition:(CFCoreDataCondition * __nonnull)condition;
 
 @end
