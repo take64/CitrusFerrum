@@ -10,6 +10,16 @@
 
 #import "CFCoreDataCondition.h"
 
+#pragma mark - static variables
+//
+// static variables
+//
+static NSString * const kFunctionCount  = @"count:";
+static NSString * const kFunctionMax    = @"max:";
+static NSString * const kFunctionMin    = @"min:";
+static NSString * const kFunctionAverage= @"average:";
+static NSString * const kFunctionSum    = @"sum:";
+
 @interface CFCoreDataRequest()
 
 #pragma mark - property
@@ -46,20 +56,7 @@
 - (NSArray *) requestWithCondition:(CFCoreDataCondition * __nonnull)condition
 {
     // リクエスト生成
-    NSFetchRequest *request = [self fetchRequestWithWhereQuery:[condition query] whereParameters:[condition parameters]];
-    
-    // ソート
-    [request setSortDescriptors:[condition convertSortDescriptors]];
-    
-    // フェッチリミット
-    if ([condition limit] != nil)
-    {
-        [request setFetchLimit:[[condition limit] integerValue]];
-    }
-    
-    // フェッチオフセット
-    [request setFetchOffset:[[condition offset] integerValue]];
-    
+    NSFetchRequest *request = [self fetchRequestWithCondition:condition];
     
     // 実取得
     NSError *error;
@@ -102,10 +99,7 @@
 - (NSFetchedResultsController *) fetchWithSectionNameKeyPath:(NSString *)sectionNameKeyPath cacheName:(NSString *)cacheName refreshCache:(BOOL)refrechCache condition:(CFCoreDataCondition * __nonnull)condition
 {
     // リクエスト生成
-    NSFetchRequest *request = [self fetchRequestWithWhereQuery:[condition query] whereParameters:[condition parameters]];
-    
-    // ソート
-    [request setSortDescriptors:[condition convertSortDescriptors]];
+    NSFetchRequest *request = [self fetchRequestWithCondition:condition];
     
     // 実取得して返却
     return [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[self objectContext] sectionNameKeyPath:sectionNameKeyPath cacheName:cacheName];
@@ -114,31 +108,31 @@
 // count取得(1件)
 - (NSNumber *) countWithColumnName:(NSString *)columnName condition:(CFCoreDataCondition * __nonnull)condition
 {
-    return [self numberFunctionWithFunctionName:@"count:" columnName:columnName condiion:condition];
+    return [self numberFunctionWithFunctionName:kFunctionCount columnName:columnName condition:condition];
 }
 
 // max取得(1件)
 - (NSNumber *) maxWithColumnName:(NSString *)columnName condition:(CFCoreDataCondition * __nonnull)condition
 {
-    return [self numberFunctionWithFunctionName:@"max:" columnName:columnName condiion:condition];
+    return [self numberFunctionWithFunctionName:kFunctionMax columnName:columnName condition:condition];
 }
 
 // min取得(1件)
 - (NSNumber *) minWithColumnName:(NSString *)columnName condition:(CFCoreDataCondition * __nonnull)condition
 {
-    return [self numberFunctionWithFunctionName:@"min:" columnName:columnName condiion:condition];
+    return [self numberFunctionWithFunctionName:kFunctionMin columnName:columnName condition:condition];
 }
 
 // average取得(1件)
 - (NSNumber *) averageWithColumnName:(NSString *)columnName condition:(CFCoreDataCondition * __nonnull)condition
 {
-    return [self numberFunctionWithFunctionName:@"average:" columnName:columnName condiion:condition];
+    return [self numberFunctionWithFunctionName:kFunctionAverage columnName:columnName condition:condition];
 }
 
 // sum取得(1件)
 - (NSNumber *) sumWithColumnName:(NSString *)columnName condition:(CFCoreDataCondition * __nonnull)condition
 {
-    return [self numberFunctionWithFunctionName:@"sum:" columnName:columnName condiion:condition];
+    return [self numberFunctionWithFunctionName:kFunctionSum columnName:columnName condition:condition];
 }
 
 
@@ -149,10 +143,10 @@
 //
 
 // 数値functionで取得(1件)
-- (NSNumber *) numberFunctionWithFunctionName:(NSString *)functionName columnName:(NSString *)columnName condiion:(CFCoreDataCondition * __nonnull)condition
+- (NSNumber *) numberFunctionWithFunctionName:(NSString *)functionName columnName:(NSString *)columnName condition:(CFCoreDataCondition * __nonnull)condition
 {
     // リクエスト生成
-    NSFetchRequest *request = [self fetchRequestWithWhereQuery:[condition query] whereParameters:[condition parameters]];
+    NSFetchRequest *request = [self fetchRequestWithCondition:condition];
     
     // expression
     NSExpression *keyPathExpression = [NSExpression expressionForKeyPath:columnName];
@@ -165,13 +159,7 @@
     
     // result properties
     [request setResultType:NSDictionaryResultType];
-    [request setPropertiesToFetch:[NSArray arrayWithObject:expressionDescription]];
-    
-    // groupby
-    if ([condition groupby] != nil)
-    {
-        [request setPropertiesToGroupBy:[condition groupby]];
-    }
+    [request setPropertiesToFetch:@[ expressionDescription ]];
     
     // データ取得
     NSError *error;
@@ -187,7 +175,7 @@
 }
 
 // NSFetchRequestの生成
-- (NSFetchRequest *) fetchRequestWithWhereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
+- (NSFetchRequest *) fetchRequestWithCondition:(CFCoreDataCondition * __nonnull)condition
 {
     // リクエスト
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -197,8 +185,29 @@
     [request setEntity:entity];
     
     // 取得条件
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:whereQuery argumentArray:whereParameters];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:[condition query] argumentArray:[condition parameters]];
     [request setPredicate:predicate];
+    
+    // ソート
+    [request setSortDescriptors:[condition convertSortDescriptors]];
+    
+    // フェッチリミット
+    if ([condition limit] != nil)
+    {
+        [request setFetchLimit:[[condition limit] integerValue]];
+    }
+    
+    // フェッチオフセット
+    if ([condition offset] != nil)
+    {
+        [request setFetchOffset:[[condition offset] integerValue]];
+    }
+    
+    // グルーピング
+    [request setPropertiesToGroupBy:[condition groupby]];
+    
+    // ソート
+    [request setSortDescriptors:[condition convertSortDescriptors]];
     
     return request;
 }
