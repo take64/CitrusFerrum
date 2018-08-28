@@ -18,21 +18,6 @@
 // 初期化
 - (instancetype) initWithStorePath:(NSString *)storePath modelName:(NSString *)modelName modelExtension:(NSString *)modelExtension;
 
-//// コンテクスト
-//- (NSManagedObjectContext *) managedObjectContext:(NSThread *)thread;
-//
-//// コンテクスト(メインスレッド)
-//- (NSManagedObjectContext *) managedObjectContextForMainThread;
-//
-//// コンテクスト(カレントスレッド)
-//- (NSManagedObjectContext *) managedObjectContextForCurrentThread;
-//
-//// モデル
-//- (NSManagedObjectModel *) managedObjectModel;
-//
-//// ストア
-//- (NSPersistentStoreCoordinator *) persistentStoreCoordinator;
-
 // 保存
 - (BOOL) saveContext;
 
