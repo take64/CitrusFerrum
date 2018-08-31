@@ -8,7 +8,7 @@
 
 #import "CFCoreDataManager.h"
 
-static const NSString *CFCoreDataManagerContextThreadKey = @"CFCoreDataManagerContextThreadKey";
+static NSString * const kCoreDataManagerContextThreadKey = @"CFCoreDataManagerContextThreadKey";
 
 @interface CFCoreDataManager()
 
@@ -143,7 +143,7 @@ static const NSString *CFCoreDataManagerContextThreadKey = @"CFCoreDataManagerCo
 {
     // 対象スレッドからコンテキスト取得
     NSMutableDictionary *threadDictionary = [thread threadDictionary];
-    NSManagedObjectContext *context = [threadDictionary objectForKey:CFCoreDataManagerContextThreadKey];
+    NSManagedObjectContext *context = [threadDictionary objectForKey:kCoreDataManagerContextThreadKey];
     
     // 取得できない場合
     if(context == nil)
@@ -153,7 +153,7 @@ static const NSString *CFCoreDataManagerContextThreadKey = @"CFCoreDataManagerCo
         // ストア関連付け
         [context setPersistentStoreCoordinator:[self persistentStoreCoordinator]];
         // 現在スレッドに設定
-        [[thread threadDictionary] setObject:context forKey:CFCoreDataManagerContextThreadKey];
+        [[thread threadDictionary] setObject:context forKey:kCoreDataManagerContextThreadKey];
         // マージポリシー
         [context setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
     }
