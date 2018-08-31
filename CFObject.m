@@ -64,7 +64,7 @@ static const char * callPropertyType(objc_property_t property)
     NSMutableString *result = [NSMutableString string];
     
     // クラス名とポインタ
-    NSString *className = [self className];
+    NSString *className = NSStringFromClass([self class]);
     NSString *address = [NSString stringWithFormat:@"%p", self];
     [result appendFormat:@"<%@: %@> {\n", className, address];
     
