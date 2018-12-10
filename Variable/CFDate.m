@@ -200,16 +200,14 @@
 + (NSDate *) prevMonthFirstDateWithDate:(NSDate *)dateValue
 {
     NSDateComponents *components = [CFDate componentsWithDate:dateValue];
-    NSDate *resultDate = [self dateWithYear:[components year] month:[components month] - 1 day:1 hour:0 minute:0 second:0];
-    return resultDate;
+    return [self dateWithYear:[components year] month:[components month] - 1 day:1 hour:0 minute:0 second:0];
 }
 
 // 翌月の月初めを取得
 + (NSDate *) nextMonthFirstDateWithDate:(NSDate *)dateValue
 {
     NSDateComponents *components = [CFDate componentsWithDate:dateValue];
-    NSDate *resultDate = [self dateWithYear:[components year] month:[components month] + 1 day:1 hour:0 minute:0 second:0];
-    return resultDate;
+    return [self dateWithYear:[components year] month:[components month] + 1 day:1 hour:0 minute:0 second:0];
 }
 
 @end
