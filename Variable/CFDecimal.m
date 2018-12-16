@@ -10,13 +10,15 @@
 
 #import "CFEmptyVL.h"
 
+static NSUInteger const kDecimalNoneScale = -1;
+
 
 
 @implementation CFDecimal
 
-#pragma mark - method
+#pragma mark - static method
 //
-// method
+// static method
 //
 
 // NSDecimalNumberからフォーマット文字列を生成
@@ -26,7 +28,7 @@
 }
 
 // NSDecimalNumberからフォーマット文字列を生成
-+ (NSString *) formatWithDecimal:(NSDecimalNumber *)decimalValue scale:(int)scale
++ (NSString *) formatWithDecimal:(NSDecimalNumber *)decimalValue scale:(NSUInteger)scale
 {
     return [self formatWithDecimal:decimalValue prefix:@"" suffix:@"" scale:scale];
 }
@@ -34,30 +36,14 @@
 // NSDecimalNumberからフォーマット文字列を生成
 + (NSString *) formatWithDecimal:(NSDecimalNumber *)decimalValue prefix:(NSString *)prefixString suffix:(NSString *)suffixString;
 {
-    static NSNumberFormatter *numberFormat;
-    if(numberFormat == nil)
-    {
-        numberFormat = [[NSNumberFormatter alloc] init];
-        [numberFormat setNumberStyle:NSNumberFormatterDecimalStyle];
-        [numberFormat setGroupingSeparator:@","];
-        [numberFormat setGroupingSize:3];
-    }
-    prefixString = [CFEmptyVL compare:prefixString replace:@""];
-    suffixString = [CFEmptyVL compare:suffixString replace:@""];
-    
-    [numberFormat setPositivePrefix:prefixString];
-    [numberFormat setPositiveSuffix:suffixString];
-    [numberFormat setNegativePrefix:[NSString stringWithFormat:@"-%@", prefixString]];
-    [numberFormat setNegativeSuffix:suffixString];
-    
-    return [numberFormat stringForObjectValue:decimalValue];
+    return [self formatWithDecimal:decimalValue prefix:prefixString suffix:suffixString scale:kDecimalNoneScale];
 }
 
 // NSDecimalNumberからフォーマット文字列を生成
-+ (NSString *) formatWithDecimal:(NSDecimalNumber *)decimalValue prefix:(NSString *)prefixString suffix:(NSString *)suffixString scale:(int)scale
++ (NSString *) formatWithDecimal:(NSDecimalNumber *)decimalValue prefix:(NSString *)prefixString suffix:(NSString *)suffixString scale:(NSUInteger)scale
 {
     static NSNumberFormatter *numberFormat;
-    if(numberFormat == nil)
+    if (numberFormat == nil)
     {
         numberFormat = [[NSNumberFormatter alloc] init];
         [numberFormat setNumberStyle:NSNumberFormatterDecimalStyle];
@@ -72,7 +58,10 @@
     [numberFormat setNegativePrefix:[NSString stringWithFormat:@"-%@", prefixString]];
     [numberFormat setNegativeSuffix:suffixString];
     
-    [numberFormat setMinimumFractionDigits:scale];
+    if (scale != kDecimalNoneScale)
+    {
+        [numberFormat setMinimumFractionDigits:scale];
+    }
     
     return [numberFormat stringForObjectValue:decimalValue];
 }
@@ -80,7 +69,7 @@
 // doubleからの変換
 + (NSDecimalNumber *) decimalWithDouble:(double)doubleValue
 {
-    return [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithDouble:doubleValue] decimalValue]];
+    return [NSDecimalNumber decimalNumberWithDecimal:[@(doubleValue) decimalValue]];
 }
 
 // NSStringからの変換

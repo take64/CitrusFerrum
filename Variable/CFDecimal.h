@@ -11,20 +11,20 @@
 @interface CFDecimal : NSObject
 
 //
-// method
+// static method
 //
 
 // NSDecimalNumberからフォーマット文字列を作成
 + (NSString *) formatWithDecimal:(NSDecimalNumber *)decimalValue;
 
 // NSDecimalNumberからフォーマット文字列を生成
-+ (NSString *) formatWithDecimal:(NSDecimalNumber *)decimalValue scale:(int)scale;
++ (NSString *) formatWithDecimal:(NSDecimalNumber *)decimalValue scale:(NSUInteger)scale;
 
 // NSDecimalNumberからフォーマット文字列を作成
 + (NSString *) formatWithDecimal:(NSDecimalNumber *)decimalValue prefix:(NSString *)prefixString suffix:(NSString *)suffixString;
 
 // NSDecimalNumberからフォーマット文字列を生成
-+ (NSString *) formatWithDecimal:(NSDecimalNumber *)decimalValue prefix:(NSString *)prefixString suffix:(NSString *)suffixString scale:(int)scale;
++ (NSString *) formatWithDecimal:(NSDecimalNumber *)decimalValue prefix:(NSString *)prefixString suffix:(NSString *)suffixString scale:(NSUInteger)scale;
 
 // doubleからの変換
 + (NSDecimalNumber *) decimalWithDouble:(double)doubleValue;
