@@ -38,7 +38,7 @@ static NSString * const kCoreDataManagerContextThreadKey = @"CFCoreDataManagerCo
 - (instancetype) initWithStorePath:(NSString *)storePath modelName:(NSString *)modelName modelExtension:(NSString *)modelExtension
 {
     self = [super init];
-    if(self)
+    if (self)
     {
         // 初期設定
         [self setModelName      :modelName];
@@ -58,7 +58,7 @@ static NSString * const kCoreDataManagerContextThreadKey = @"CFCoreDataManagerCo
     BOOL result;
     
     // メインスレッドでない場合は通知する
-    if(isMainThread == NO)
+    if (isMainThread == NO)
     {
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(managedObjectContextDidSave:)
@@ -68,7 +68,7 @@ static NSString * const kCoreDataManagerContextThreadKey = @"CFCoreDataManagerCo
         // 保存処理
         NSError *error;
         result = [context save:&error];
-        if(error != nil)
+        if (error != nil)
         {
             NSLog(@"error : %@", error);
         }
@@ -152,7 +152,7 @@ static NSString * const kCoreDataManagerContextThreadKey = @"CFCoreDataManagerCo
     NSManagedObjectContext *context = [threadDictionary objectForKey:kCoreDataManagerContextThreadKey];
     
     // 取得できない場合
-    if(context == nil)
+    if (context == nil)
     {
         // 生成
         context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];

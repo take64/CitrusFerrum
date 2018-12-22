@@ -42,7 +42,7 @@
 - (instancetype)initWithBlock:(CitrusFerrumTaskBlock)block chainAutoStart:(BOOL)autoStart
 {
     self = [super init];
-    if(self)
+    if (self)
     {
         // 状態
         [self setState:CitrusFerrumTaskStateWait];
@@ -73,7 +73,7 @@
     [self setState:CitrusFerrumTaskStateProcessing];
     
     // タスク開始
-    if(self.block != nil)
+    if (self.block != nil)
     {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.block();

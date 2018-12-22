@@ -29,7 +29,7 @@
 - (instancetype)init
 {
     self = [super init];
-    if(self)
+    if (self)
     {
         [self setNodes:[NSMutableArray new]];
         [self setDelay:@0];
@@ -95,7 +95,7 @@
     }
     
     // 実行中タスクがない場合は、実行予定タスクを実行
-    if(processingTask == nil && nextTask != nil)
+    if (processingTask == nil && nextTask != nil)
     {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, [[self delay] doubleValue] * NSEC_PER_SEC), [CFTask sharedQueue], ^{
             [nextTask start];
@@ -104,13 +104,13 @@
         dispatch_async([CFTask sharedQueue], ^{
             [nextTask setState:CitrusFerrumTaskStateComplete];
             dispatch_async(dispatch_get_main_queue(), ^{
-                if(self.progressBlock != nil)
+                if (self.progressBlock != nil)
                 {
                     self.progressBlock([CFProgress newWithCurrent:@(completeCount+1) total:@(totalCount)]);
                 }
                 
                 // 回帰実行する
-                if([nextTask chainAutoStart] == YES)
+                if ([nextTask chainAutoStart] == YES)
                 {
                     [self start];
                 }
