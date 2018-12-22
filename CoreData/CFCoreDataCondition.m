@@ -23,6 +23,19 @@
 
 
 
+#pragma mark - extends
+//
+// extends
+//
+
+// 初期化
+- (instancetype) init
+{
+    return [self initWithQuery:@"" parameters:nil];
+}
+
+
+
 #pragma mark - method
 //
 // method

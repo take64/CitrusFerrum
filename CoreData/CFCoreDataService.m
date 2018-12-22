@@ -10,6 +10,8 @@
 
 #import <CoreData/CoreData.h>
 
+#import "CFArray.h"
+#import "CFElement.h"
 #import "CFNVL.h"
 
 
@@ -54,19 +56,18 @@
 }
 
 // ObjectデータをEntityにbindする
-+ (NSManagedObject *) bindEntity:(NSManagedObject *)entityValue fromObject:(CTBusinessElement *)elementValue
++ (NSManagedObject *) bindEntity:(NSManagedObject *)entityValue fromObject:(CFElement *)elementValue
 {
     NSArray *keyList = [[[entityValue entity] attributesByName] allKeys];
     for (NSString *keyString in keyList)
     {
         // カラムによってはスルーする
-        if ([keyString isEqualToString:@"status"] == YES
-           || [keyString isEqualToString:@"created"] == YES
-           || [keyString isEqualToString:@"modified"] == YES)
+        if ([CFArray inString:keyString array:@[ @"status", @"created", @"modified" ]] == YES)
         {
             continue;
         }
         
+        // 指定カラムでプロパティを取得できる
         if ([elementValue respondsToSelector:NSSelectorFromString(keyString)] == YES
                 && [elementValue valueForKey:keyString] != nil)
         {
@@ -75,6 +76,12 @@
     }
     
     return entityValue;
+}
+
+// リクエスト
++ (CFCoreDataRequest *) callRequest
+{
+    return nil;
 }
 
 @end

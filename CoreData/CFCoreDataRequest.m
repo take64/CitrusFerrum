@@ -10,6 +10,8 @@
 
 #import "CFCoreDataCondition.h"
 
+
+
 #pragma mark - static variables
 //
 // static variables
@@ -19,6 +21,8 @@ static NSString * const kFunctionMax    = @"max:";
 static NSString * const kFunctionMin    = @"min:";
 static NSString * const kFunctionAverage= @"average:";
 static NSString * const kFunctionSum    = @"sum:";
+
+
 
 @interface CFCoreDataRequest()
 
@@ -65,7 +69,7 @@ static NSString * const kFunctionSum    = @"sum:";
     // エラー
     if (error != nil)
     {
-        NSLog(@"ERROR! CTCoreDataRequest.requestWithContext - %@",error);
+        NSLog(@"ERROR! CFCoreDataRequest.requestWithContext - %@",error);
         return nil;
     }
     else if ([results count] == 0)
@@ -168,7 +172,7 @@ static NSString * const kFunctionSum    = @"sum:";
     // エラー
     if (error != nil)
     {
-        NSLog(@"ERROR! CTCoreDataRequest.function - %@",error);
+        NSLog(@"ERROR! CFCoreDataRequest.function - %@",error);
         return @0;
     }
     return [[results objectAtIndex:0] valueForKey:@"result"];

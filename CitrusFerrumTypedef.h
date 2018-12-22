@@ -9,7 +9,15 @@
 #ifndef CitrusFerrumTypedef_h
 #define CitrusFerrumTypedef_h
 
+// 汎用ブロック
 typedef void (^CitrusFerrumCompleteBlock)(void);
+
+// zero
+#define CFDecimalZero [NSDecimalNumber zero]
+
+// coredata status status
+#define CFCoreDataStatusNormal @0
+#define CFCoreDataStatusRemove @9
 
 #if DEBUG
 #define CFLog(...) NSLog(__VA_ARGS__)
