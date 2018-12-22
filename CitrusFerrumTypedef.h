@@ -12,6 +12,12 @@
 // 汎用ブロック
 typedef void (^CitrusFerrumCompleteBlock)(void);
 
+// 汎用ブロック
+typedef void (^CitrusFerrumUserBlock)(id userInfo, NSError *error);
+
+// 汎用データブロック
+typedef void (^CitrusFerrumDataBlock)(NSData *data, NSError *error);
+
 // zero
 #define CFDecimalZero [NSDecimalNumber zero]
 
