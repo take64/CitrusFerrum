@@ -32,4 +32,13 @@
 // NSStringからの変換
 + (NSDecimalNumber *) decimalWithString:(NSString *)stringValue;
 
+// NSNumberからの変換
++ (NSDecimalNumber *) decimalWithNumber:(NSNumber *)numberValue;
+
+// 比較して最大値を取得する
++ (NSDecimalNumber *) max:(NSDecimalNumber *)decimal1 with:(NSDecimalNumber *)decimal2;
+
+// 比較して最小値を取得する
++ (NSDecimalNumber *) min:(NSDecimalNumber *)decimal1 with:(NSDecimalNumber *)decimal2;
+
 @end

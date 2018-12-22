@@ -88,4 +88,30 @@ static NSUInteger const kDecimalNoneScale = -1;
     return decimalValue;
 }
 
+// NSNumberからの変換
++ (NSDecimalNumber *) decimalWithNumber:(NSNumber *)numberValue
+{
+    return [NSDecimalNumber decimalNumberWithDecimal:[numberValue decimalValue]];
+}
+
+// 比較して最大値を取得する
++ (NSDecimalNumber *) max:(NSDecimalNumber *)decimal1 with:(NSDecimalNumber *)decimal2
+{
+    if ([decimal1 compare:decimal2] == NSOrderedDescending)
+    {
+        return decimal1;
+    }
+    return decimal2;
+}
+
+// 比較して最小値を取得する
++ (NSDecimalNumber *) min:(NSDecimalNumber *)decimal1 with:(NSDecimalNumber *)decimal2
+{
+    if ([decimal1 compare:decimal2] == NSOrderedAscending)
+    {
+        return decimal1;
+    }
+    return decimal2;
+}
+
 @end
