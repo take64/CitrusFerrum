@@ -37,8 +37,10 @@
 //- (void) managedObjectContextDidSave:(NSNotification *)notification;
 
 // データオブジェクト生成
-- (NSManagedObject *)newObjectWithEntityName:(NSString *)entityName;
+- (NSManagedObject *) newObjectWithEntityName:(NSString *)entityName;
 
+// コンテクスト(カレントスレッド)
+- (NSManagedObjectContext *) managedObjectContextForCurrentThread;
 
 @end
 

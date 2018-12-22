@@ -126,9 +126,15 @@ static NSString * const kCoreDataManagerContextThreadKey = @"CFCoreDataManagerCo
 }
 
 // データオブジェクト生成
-- (NSManagedObject *)newObjectWithEntityName:(NSString *)entityName
+- (NSManagedObject *) newObjectWithEntityName:(NSString *)entityName
 {
     return [NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:[self managedObjectContextForCurrentThread]];
+}
+
+// コンテクスト(カレントスレッド)
+- (NSManagedObjectContext *) managedObjectContextForCurrentThread
+{
+    return [self managedObjectContext:[NSThread currentThread]];
 }
 
 
@@ -165,12 +171,6 @@ static NSString * const kCoreDataManagerContextThreadKey = @"CFCoreDataManagerCo
 - (NSManagedObjectContext *) managedObjectContextForMainThread
 {
     return [self managedObjectContext:[NSThread mainThread]];
-}
-
-// コンテクスト(カレントスレッド)
-- (NSManagedObjectContext *) managedObjectContextForCurrentThread
-{
-    return [self managedObjectContext:[NSThread currentThread]];
 }
 
 // モデル

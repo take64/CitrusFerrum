@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+@class NSManagedObject;
+
+@class CFElement;
+
 @interface CFCoreDataService : NSObject
 
 //
@@ -18,6 +22,9 @@
 + (NSDictionary *) dictionaryWithEntity:(NSManagedObject *)entityValue;
 
 // ObjectデータをEntityにbindする
-+ (NSManagedObject *) bindEntity:(NSManagedObject *)entityValue fromObject:(CTBusinessElement *)elementValue;
++ (NSManagedObject *) bindEntity:(NSManagedObject *)entityValue fromObject:(CFElement *)elementValue;
+
+// リクエスト
++ (CFCoreDataRequest *) callRequest;
 
 @end
