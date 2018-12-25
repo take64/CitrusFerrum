@@ -21,51 +21,6 @@ static NSUInteger const kDecimalNoneScale = -1;
 // static method
 //
 
-// NSDecimalNumberからフォーマット文字列を生成
-+ (NSString *) formatWithDecimal:(NSDecimalNumber *)decimalValue
-{
-    return [self formatWithDecimal:decimalValue prefix:nil suffix:nil];
-}
-
-// NSDecimalNumberからフォーマット文字列を生成
-+ (NSString *) formatWithDecimal:(NSDecimalNumber *)decimalValue scale:(NSUInteger)scale
-{
-    return [self formatWithDecimal:decimalValue prefix:@"" suffix:@"" scale:scale];
-}
-
-// NSDecimalNumberからフォーマット文字列を生成
-+ (NSString *) formatWithDecimal:(NSDecimalNumber *)decimalValue prefix:(NSString *)prefixString suffix:(NSString *)suffixString;
-{
-    return [self formatWithDecimal:decimalValue prefix:prefixString suffix:suffixString scale:kDecimalNoneScale];
-}
-
-// NSDecimalNumberからフォーマット文字列を生成
-+ (NSString *) formatWithDecimal:(NSDecimalNumber *)decimalValue prefix:(NSString *)prefixString suffix:(NSString *)suffixString scale:(NSUInteger)scale
-{
-    static NSNumberFormatter *numberFormat;
-    if (numberFormat == nil)
-    {
-        numberFormat = [[NSNumberFormatter alloc] init];
-        [numberFormat setNumberStyle:NSNumberFormatterDecimalStyle];
-        [numberFormat setGroupingSeparator:@","];
-        [numberFormat setGroupingSize:3];
-    }
-    prefixString = [CFEmptyVL compare:prefixString replace:@""];
-    suffixString = [CFEmptyVL compare:suffixString replace:@""];
-    
-    [numberFormat setPositivePrefix:prefixString];
-    [numberFormat setPositiveSuffix:suffixString];
-    [numberFormat setNegativePrefix:[NSString stringWithFormat:@"-%@", prefixString]];
-    [numberFormat setNegativeSuffix:suffixString];
-    
-    if (scale != kDecimalNoneScale)
-    {
-        [numberFormat setMinimumFractionDigits:scale];
-    }
-    
-    return [numberFormat stringForObjectValue:decimalValue];
-}
-
 // doubleからの変換
 + (NSDecimalNumber *) decimalWithDouble:(double)doubleValue
 {
@@ -112,6 +67,94 @@ static NSUInteger const kDecimalNoneScale = -1;
         return decimal1;
     }
     return decimal2;
+}
+
+// 最大値の取得
++ (NSDecimalNumber *) maxWidhList:(NSArray<NSDecimalNumber *> *)listValue
+{
+    NSDecimalNumber *result = [NSDecimalNumber minimumDecimalNumber];
+    for(NSDecimalNumber *one in listValue)
+    {
+        if([result compare:one] == NSOrderedAscending)
+        {
+            result = one;
+        }
+    }
+    return result;
+}
+
+// 最小値の取得
++ (NSDecimalNumber *) minWidhList:(NSArray<NSDecimalNumber *> *)listValue
+{
+    NSDecimalNumber *result = [NSDecimalNumber maximumDecimalNumber];
+    for(NSDecimalNumber *one in listValue)
+    {
+        if([result compare:one] == NSOrderedDescending)
+        {
+            result = one;
+        }
+    }
+    return result;
+}
+
+// 平均値の取得
++ (NSDecimalNumber *) avgWidhList:(NSArray<NSDecimalNumber *> *)listValue
+{
+    NSDecimalNumber *count = [NSDecimalNumber zero];
+    NSDecimalNumber *total = [NSDecimalNumber zero];
+    for(NSDecimalNumber *one in listValue)
+    {
+        count = [count decimalNumberByAdding:[NSDecimalNumber one]];
+        total = [total decimalNumberByAdding:one];
+    }
+    if([total compare:[NSDecimalNumber zero]] == NSOrderedSame)
+    {
+        return [NSDecimalNumber zero];
+    }
+    return [total decimalNumberByDividingBy:count];
+}
+
+// 切り上げ、切り捨て、四捨五入
++ (NSDecimalNumber *) decimalRoundingMode:(NSRoundingMode)roundingMode decimal:(NSDecimalNumber *)decimalValue scale:(NSUInteger)scale
+{
+    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:roundingMode scale:scale raiseOnExactness:YES raiseOnOverflow:YES raiseOnUnderflow:YES raiseOnDivideByZero:YES];
+    return [decimalValue decimalNumberByRoundingAccordingToBehavior:handler];
+}
+
+// 切り上げ
++ (NSDecimalNumber *) decimalRoundUpWithDecimal:(NSDecimalNumber *) decimalValue
+{
+    return [self decimalRoundingMode:NSRoundUp decimal:decimalValue scale:0];
+}
+
+// 切り上げ
++ (NSDecimalNumber *) decimalRoundUpWithDecimal:(NSDecimalNumber *) decimalValue scale:(NSUInteger)scale
+{
+    return [self decimalRoundingMode:NSRoundUp decimal:decimalValue scale:scale];
+}
+
+// 切り捨て
++ (NSDecimalNumber *) decimalRoundDownWithDecimal:(NSDecimalNumber *) decimalValue
+{
+    return [self decimalRoundingMode:NSRoundDown decimal:decimalValue scale:0];
+}
+
+// 切り捨て
++ (NSDecimalNumber *) decimalRoundDownWithDecimal:(NSDecimalNumber *) decimalValue scale:(NSUInteger)scale
+{
+    return [self decimalRoundingMode:NSRoundDown decimal:decimalValue scale:scale];
+}
+
+// 四捨五入
++ (NSDecimalNumber *) decimalRoundPlainWithDecimal:(NSDecimalNumber *) decimalValue
+{
+    return [self decimalRoundingMode:NSRoundPlain decimal:decimalValue scale:0];
+}
+
+// 四捨五入
++ (NSDecimalNumber *) decimalRoundPlainWithDecimal:(NSDecimalNumber *) decimalValue scale:(NSUInteger)scale
+{
+    return [self decimalRoundingMode:NSRoundPlain decimal:decimalValue scale:scale];
 }
 
 @end
