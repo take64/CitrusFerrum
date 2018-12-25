@@ -14,18 +14,6 @@
 // static method
 //
 
-// NSDecimalNumberからフォーマット文字列を作成
-+ (NSString *) formatWithDecimal:(NSDecimalNumber *)decimalValue;
-
-// NSDecimalNumberからフォーマット文字列を生成
-+ (NSString *) formatWithDecimal:(NSDecimalNumber *)decimalValue scale:(NSUInteger)scale;
-
-// NSDecimalNumberからフォーマット文字列を作成
-+ (NSString *) formatWithDecimal:(NSDecimalNumber *)decimalValue prefix:(NSString *)prefixString suffix:(NSString *)suffixString;
-
-// NSDecimalNumberからフォーマット文字列を生成
-+ (NSString *) formatWithDecimal:(NSDecimalNumber *)decimalValue prefix:(NSString *)prefixString suffix:(NSString *)suffixString scale:(NSUInteger)scale;
-
 // doubleからの変換
 + (NSDecimalNumber *) decimalWithDouble:(double)doubleValue;
 
@@ -40,5 +28,35 @@
 
 // 比較して最小値を取得する
 + (NSDecimalNumber *) min:(NSDecimalNumber *)decimal1 with:(NSDecimalNumber *)decimal2;
+
+// 最大値の取得
++ (NSDecimalNumber *) maxWidhList:(NSArray<NSDecimalNumber *> *)listValue;
+
+// 最小値の取得
++ (NSDecimalNumber *) minWidhList:(NSArray<NSDecimalNumber *> *)listValue;
+
+// 平均値の取得
++ (NSDecimalNumber *) avgWidhList:(NSArray<NSDecimalNumber *> *)listValue;
+
+// 切り上げ、切り捨て、四捨五入
++ (NSDecimalNumber *) decimalRoundingMode:(NSRoundingMode)roundingMode decimal:(NSDecimalNumber *)decimalValue scale:(NSUInteger)scale;
+
+// 切り上げ
++ (NSDecimalNumber *) decimalRoundUpWithDecimal:(NSDecimalNumber *) decimalValue;
+
+// 切り上げ
++ (NSDecimalNumber *) decimalRoundUpWithDecimal:(NSDecimalNumber *) decimalValue scale:(NSUInteger)scale;
+
+// 切り捨て
++ (NSDecimalNumber *) decimalRoundDownWithDecimal:(NSDecimalNumber *) decimalValue;
+
+// 切り捨て
++ (NSDecimalNumber *) decimalRoundDownWithDecimal:(NSDecimalNumber *) decimalValue scale:(NSUInteger)scale;
+
+// 四捨五入
++ (NSDecimalNumber *) decimalRoundPlainWithDecimal:(NSDecimalNumber *) decimalValue;
+
+// 四捨五入
++ (NSDecimalNumber *) decimalRoundPlainWithDecimal:(NSDecimalNumber *) decimalValue scale:(NSUInteger)scale;
 
 @end
