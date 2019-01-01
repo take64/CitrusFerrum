@@ -10,8 +10,6 @@
 
 #import "CFEmptyVL.h"
 
-static NSUInteger const kDecimalNoneScale = -1;
-
 
 
 @implementation CFDecimal
@@ -73,9 +71,9 @@ static NSUInteger const kDecimalNoneScale = -1;
 + (NSDecimalNumber *) maxWidhList:(NSArray<NSDecimalNumber *> *)listValue
 {
     NSDecimalNumber *result = [NSDecimalNumber minimumDecimalNumber];
-    for(NSDecimalNumber *one in listValue)
+    for (NSDecimalNumber *one in listValue)
     {
-        if([result compare:one] == NSOrderedAscending)
+        if ([result compare:one] == NSOrderedAscending)
         {
             result = one;
         }
@@ -87,9 +85,9 @@ static NSUInteger const kDecimalNoneScale = -1;
 + (NSDecimalNumber *) minWidhList:(NSArray<NSDecimalNumber *> *)listValue
 {
     NSDecimalNumber *result = [NSDecimalNumber maximumDecimalNumber];
-    for(NSDecimalNumber *one in listValue)
+    for (NSDecimalNumber *one in listValue)
     {
-        if([result compare:one] == NSOrderedDescending)
+        if ([result compare:one] == NSOrderedDescending)
         {
             result = one;
         }
@@ -102,12 +100,12 @@ static NSUInteger const kDecimalNoneScale = -1;
 {
     NSDecimalNumber *count = [NSDecimalNumber zero];
     NSDecimalNumber *total = [NSDecimalNumber zero];
-    for(NSDecimalNumber *one in listValue)
+    for (NSDecimalNumber *one in listValue)
     {
         count = [count decimalNumberByAdding:[NSDecimalNumber one]];
         total = [total decimalNumberByAdding:one];
     }
-    if([total compare:[NSDecimalNumber zero]] == NSOrderedSame)
+    if ([total compare:[NSDecimalNumber zero]] == NSOrderedSame)
     {
         return [NSDecimalNumber zero];
     }
