@@ -8,6 +8,11 @@
 
 #import "CFFormat.h"
 
+#import "CFEmptyVL.h"
+
+static NSUInteger const kFormatNoneScale = -1;
+
+
 @implementation CFFormat
 
 #pragma mark - static method
@@ -30,7 +35,7 @@
 // NSDecimalNumberからフォーマット文字列を生成
 + (NSString *) formatWithDecimal:(NSDecimalNumber *)decimalValue prefix:(NSString *)prefixString suffix:(NSString *)suffixString;
 {
-    return [self formatWithDecimal:decimalValue prefix:prefixString suffix:suffixString scale:kDecimalNoneScale];
+    return [self formatWithDecimal:decimalValue prefix:prefixString suffix:suffixString scale:kFormatNoneScale];
 }
 
 // NSDecimalNumberからフォーマット文字列を生成
@@ -52,7 +57,7 @@
     [numberFormat setNegativePrefix:[NSString stringWithFormat:@"-%@", prefixString]];
     [numberFormat setNegativeSuffix:suffixString];
     
-    if (scale != kDecimalNoneScale)
+    if (scale != kFormatNoneScale)
     {
         [numberFormat setMinimumFractionDigits:scale];
     }
