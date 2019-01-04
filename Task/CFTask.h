@@ -14,19 +14,27 @@
 @interface CFTask : NSObject
 
 //
+// property
+//
+
+@property (nonatomic, copy) CitrusFerrumProgressBlock progressBlock;
+
+
+
+//
 // method
 //
 
 // 初期化
-- (instancetype)initWithProgress:(CitrusFerrumProgressBlock)block;
+- (instancetype) initWithProgress:(CitrusFerrumProgressBlock)block;
 
 // 開始
-- (void)start;
+- (void) start;
 
 // タスクの追加
-- (void)addTask:(CitrusFerrumTaskBlock)block;
+- (void) addTask:(CitrusFerrumTaskBlock)block;
 
 // タスクの追加
-- (void)addTask:(CitrusFerrumTaskBlock)block chainAutoStart:(BOOL)autoStart;
+- (void) addTask:(CitrusFerrumTaskBlock)block chainAutoStart:(BOOL)autoStart;
 
 @end

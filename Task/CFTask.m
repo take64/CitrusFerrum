@@ -8,11 +8,16 @@
 
 #import "CFTask.h"
 
+
+
 @interface CFTask()
 
+#pragma mark - property
+//
+// property
+//
 @property NSMutableArray<CFTaskNode *> *nodes;
 @property NSNumber *delay;
-@property CitrusFerrumProgressBlock progressBlock;
 
 @end
 
@@ -26,7 +31,7 @@
 //
 
 // 初期化
-- (instancetype)init
+- (instancetype) init
 {
     self = [super init];
     if (self)
@@ -38,7 +43,7 @@
 }
 
 // 初期化
-- (instancetype)initWithProgress:(CitrusFerrumProgressBlock)block
+- (instancetype) initWithProgress:(CitrusFerrumProgressBlock)block
 {
     self = [self init];
     if (self)
@@ -49,7 +54,7 @@
 }
 
 // 開始
-- (void)start
+- (void) start
 {
     // 実行予定タスク
     CFTaskNode *nextTask = nil;
@@ -120,14 +125,14 @@
 }
 
 // タスクの追加
-- (void)addTask:(CitrusFerrumTaskBlock)block
+- (void) addTask:(CitrusFerrumTaskBlock)block
 {
     [self addTask:block chainAutoStart:YES];
     
 }
 
 // タスクの追加
-- (void)addTask:(CitrusFerrumTaskBlock)block chainAutoStart:(BOOL)autoStart
+- (void) addTask:(CitrusFerrumTaskBlock)block chainAutoStart:(BOOL)autoStart
 {
     [[self nodes] addObject:[CFTaskNode taskWithBlock:block chainAutoStart:autoStart]];
 }

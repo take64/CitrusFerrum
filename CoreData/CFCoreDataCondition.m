@@ -100,7 +100,7 @@
         NSString *sortKey = [[sortColumn allKeys] objectAtIndex:0];
         NSNumber *ascending = [[sortColumn allValues] objectAtIndex:0];
         
-        [sortDescriptors addObject:[NSSortDescriptor sortDescriptorWithKey:sortKey ascending:ascending]];
+        [sortDescriptors addObject:[NSSortDescriptor sortDescriptorWithKey:sortKey ascending:[ascending boolValue]]];
     }
     return sortDescriptors;
 }
