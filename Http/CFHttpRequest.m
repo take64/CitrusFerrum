@@ -27,13 +27,12 @@
     urlString = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     
     CFLog(@"CFHttpRequest.getRequest :%@", urlString);
-    NSURLSession *session = [[NSURLSession alloc] init];
-    [session dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    [[[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (complete != nil)
         {
             complete(data, error);
         }
-    }];
+    }] resume];
 }
 
 // GETリクエスト
