@@ -34,7 +34,7 @@
         [sortDescriptors addObject:sort];
     }
     
-    return [[arrayList sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
+    return [arrayList sortedArrayUsingDescriptors:sortDescriptors];
 }
 
 // 配列オブジェクト内のオブジェクトを配列で返す
