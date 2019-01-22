@@ -54,8 +54,15 @@
     for (NSManagedObject *entity in entities)
     {
         NSMutableDictionary *result = [NSMutableDictionary dictionary];
-        for (NSString *column in columns)
+        for (NSString *column in [columns allKeys])
         {
+            // category項目はスルー
+            NSAttributeDescription *attributeDescription = columns[column];
+            if ([attributeDescription isTransient] == YES)
+            {
+                continue;
+            }
+            
             id value = [entity valueForKey:column];
             if (value == nil)
             {
