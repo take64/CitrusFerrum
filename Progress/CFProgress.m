@@ -48,6 +48,11 @@
     [self calcPercentage];
 }
 
+// 完了したか？
+- (BOOL) isCompleted
+{
+    return ([[self current] compare:[self total]] == NSOrderedSame);
+}
 
 
 #pragma mark - private

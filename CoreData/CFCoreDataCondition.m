@@ -8,6 +8,11 @@
 
 #import "CFCoreDataCondition.h"
 
+#import "CFNVL.h"
+#import "CFString.h"
+
+
+
 @implementation CFCoreDataCondition
 
 #pragma mark - synthesize
@@ -42,6 +47,12 @@
 //
 
 // 初期化
+- (instancetype) initWithQuery:(NSString *)query
+{
+    return [self initWithQuery:query parameters:@[]];
+}
+
+// 初期化
 - (instancetype) initWithQuery:(NSString *)query parameters:(NSArray *)parameters
 {
     return [self initWithQuery:query parameters:parameters sorts:nil];
@@ -60,7 +71,7 @@
     if (self != nil)
     {
         [self setQuery      :query];
-        [self setParameters :parameters];
+        [self setParameters :[CFNVL compare:parameters replace:@[]]];
         [self setSorts      :sorts];
         [self setLimit      :limit];
         [self setOffset     :offset];
@@ -79,6 +90,20 @@
         [self setGroupby    :groupby];
     }
     return self;
+}
+
+// クエリの追加
+- (void) addAndQuery:(NSString *)query parameters:(NSArray *)parameters
+{
+    NSString *operand = @"";
+    if ([[self query] length] > 0)
+    {
+        operand = @"AND";
+    }
+    parameters = [CFNVL compare:parameters replace:@[]];
+    
+    [self setQuery:CFStringf(@"%@ %@ %@", [self query], operand, query)];
+    [self setParameters:[[self parameters] arrayByAddingObjectsFromArray:parameters]];
 }
 
 // NSSortDescriptor への変換
