@@ -105,6 +105,12 @@ static NSString * const kFunctionSum    = @"sum:";
     // リクエスト生成
     NSFetchRequest *request = [self fetchRequestWithCondition:condition];
     
+    // キャッシュの削除
+    if (refrechCache == YES)
+    {
+        [NSFetchedResultsController deleteCacheWithName:cacheName];
+    }
+    
     // 実取得して返却
     return [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[self objectContext] sectionNameKeyPath:sectionNameKeyPath cacheName:cacheName];
 }
