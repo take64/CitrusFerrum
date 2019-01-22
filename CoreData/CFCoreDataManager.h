@@ -28,6 +28,9 @@
 - (void) saveComplete;
 
 // 削除
+- (void) deleteObject:(NSManagedObject *)managedObject;
+
+// 削除
 - (BOOL) deleteWithSave:(NSManagedObject *)managedObject;
 
 // ロールバック

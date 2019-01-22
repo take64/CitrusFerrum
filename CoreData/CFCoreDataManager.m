@@ -98,6 +98,13 @@ static NSString * const kCoreDataManagerContextThreadKey = @"CFCoreDataManagerCo
 }
 
 // 削除
+- (void) deleteObject:(NSManagedObject *)managedObject
+{
+    // 削除
+    [[self managedObjectContextForCurrentThread] deleteObject:managedObject];
+}
+
+// 削除
 - (BOOL) deleteWithSave:(NSManagedObject *)managedObject
 {
     // 削除
@@ -110,12 +117,15 @@ static NSString * const kCoreDataManagerContextThreadKey = @"CFCoreDataManagerCo
 // 保存＆mainThread保存
 - (void) saveComplete
 {
-    [self saveContext];
+    if ([NSThread isMainThread] == NO)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self saveComplete];
+            return ;
+        });
+    }
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        [self saveContext];
-    });
+    [self saveContext];
 }
 
 // ロールバック
@@ -134,7 +144,8 @@ static NSString * const kCoreDataManagerContextThreadKey = @"CFCoreDataManagerCo
 // コンテクスト(カレントスレッド)
 - (NSManagedObjectContext *) managedObjectContextForCurrentThread
 {
-    return [self managedObjectContext:[NSThread currentThread]];
+//    return [self managedObjectContext:[NSThread currentThread]];
+    return [self managedObjectContext:[NSThread mainThread]];
 }
 
 
