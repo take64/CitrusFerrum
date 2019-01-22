@@ -29,6 +29,8 @@
 // 進捗させる
 - (void) next;
 
+// 完了したか？
+- (BOOL) isCompleted;
 
 
 //
