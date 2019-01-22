@@ -9,14 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface CFCoreDataCondition : NSObject
-{
-    NSString *query;
-    NSArray *parameters;
-    NSArray<NSDictionary *> *sorts;
-    NSNumber *limit;
-    NSNumber *offset;
-    NSArray *groupby;
-}
 
 //
 // property
@@ -35,6 +27,9 @@
 //
 
 // 初期化
+- (instancetype) initWithQuery:(NSString *)query;
+
+// 初期化
 - (instancetype) initWithQuery:(NSString *)query parameters:(NSArray *)parameters;
 
 // 初期化
@@ -45,6 +40,9 @@
 
 // 初期化
 - (instancetype) initWithQuery:(NSString *)query parameters:(NSArray *)parameters groupby:(NSArray *)groupby;
+
+// クエリの追加
+- (void) addAndQuery:(NSString *)query parameters:(NSArray *)parameters;
 
 // NSSortDescriptor への変換
 - (NSMutableArray<NSSortDescriptor *> *) convertSortDescriptors;
