@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+typedef id (^CitrusFerrumNVLCollback)(void);
+
 @interface CFNVL : NSObject
 
 // NVL関数
@@ -15,5 +17,8 @@
 
 // NVL2関数
 + (id) compare:(id)compare value1:(id)value1 value2:(id)value2;
+
+// NVL^CALLBACk関数
++ (id) compare:(id)compare callback:(CitrusFerrumNVLCollback)callback;
 
 @end

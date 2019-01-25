@@ -31,4 +31,19 @@
     return NO;
 }
 
+// 配列を利用してコールバックで配列を生成する
++ (NSArray *) filter:(NSArray *)list callback:(CitrusFerrumArrayCallback)callback
+{
+    NSMutableArray *results = [@[] mutableCopy];
+    for (id one in list)
+    {
+        id filtered = callback(one);
+        if (filtered != nil)
+        {
+            [results addObject:filtered];
+        }
+    }
+    return results;
+}
+
 @end
