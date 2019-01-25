@@ -35,4 +35,14 @@
     return value1;
 }
 
+// NVL^CALLBACk関数
++ (id) compare:(id)compare callback:(CitrusFerrumNVLCollback)callback
+{
+    if (compare == nil || [compare isEqual:[NSNull null]] == YES)
+    {
+        return callback();
+    }
+    return compare;
+}
+
 @end

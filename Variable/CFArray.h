@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+typedef id (^CitrusFerrumArrayCallback)(id one);
+
 @interface CFArray : NSObject
 
 //
@@ -16,5 +18,8 @@
 
 // 配列内に一致する文字列があるか？
 + (BOOL) inString:(NSString *)needle array:(NSArray<NSString *> *)heystacks;
+
+// 配列を利用してコールバックで配列を生成する
++ (NSArray *) filter:(NSArray *)list callback:(CitrusFerrumArrayCallback)callback;
 
 @end
