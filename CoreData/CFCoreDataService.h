@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @class NSManagedObject;
-
 @class CFElement;
+@class CFCoreDataRequest;
 
 @interface CFCoreDataService : NSObject
 

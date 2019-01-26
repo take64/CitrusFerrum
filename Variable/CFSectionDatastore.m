@@ -36,7 +36,7 @@
 - (instancetype) init
 {
     self = [super init];
-    if(self)
+    if (self)
     {
         // 初期化
         [self empty];
