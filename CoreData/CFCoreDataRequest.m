@@ -57,7 +57,7 @@ static NSString * const kFunctionSum    = @"sum:";
 }
 
 // データ取得
-- (NSArray *) requestWithCondition:(CFCoreDataCondition * __nonnull)condition
+- (NSArray *) requestWithCondition:(CFCoreDataCondition *)condition
 {
     // リクエスト生成
     NSFetchRequest *request = [self fetchRequestWithCondition:condition];
@@ -81,7 +81,7 @@ static NSString * const kFunctionSum    = @"sum:";
 
 
 // データ取得(1件)
-- (NSManagedObject *) objectWithCondition:(CFCoreDataCondition * __nonnull)condition
+- (NSManagedObject *) objectWithCondition:(CFCoreDataCondition *)condition
 {
     [condition setLimit:@1];
     [condition setOffset:@0];
@@ -94,13 +94,13 @@ static NSString * const kFunctionSum    = @"sum:";
 }
 
 // データ取得(全件)
-- (NSArray *) listWithCondition:(CFCoreDataCondition * __nonnull)condition
+- (NSArray *) listWithCondition:(CFCoreDataCondition *)condition
 {
     return [self requestWithCondition:condition];
 }
 
 // フェッチ取得
-- (NSFetchedResultsController *) fetchWithSectionNameKeyPath:(NSString *)sectionNameKeyPath cacheName:(NSString *)cacheName refreshCache:(BOOL)refrechCache condition:(CFCoreDataCondition * __nonnull)condition
+- (NSFetchedResultsController *) fetchWithSectionNameKeyPath:(NSString *)sectionNameKeyPath cacheName:(NSString *)cacheName refreshCache:(BOOL)refrechCache condition:(CFCoreDataCondition *)condition
 {
     // リクエスト生成
     NSFetchRequest *request = [self fetchRequestWithCondition:condition];
@@ -116,31 +116,31 @@ static NSString * const kFunctionSum    = @"sum:";
 }
 
 // count取得(1件)
-- (NSNumber *) countWithColumnName:(NSString *)columnName condition:(CFCoreDataCondition * __nonnull)condition
+- (NSNumber *) countWithColumnName:(NSString *)columnName condition:(CFCoreDataCondition *)condition
 {
     return [self numberFunctionWithFunctionName:kFunctionCount columnName:columnName condition:condition];
 }
 
 // max取得(1件)
-- (NSNumber *) maxWithColumnName:(NSString *)columnName condition:(CFCoreDataCondition * __nonnull)condition
+- (NSNumber *) maxWithColumnName:(NSString *)columnName condition:(CFCoreDataCondition *)condition
 {
     return [self numberFunctionWithFunctionName:kFunctionMax columnName:columnName condition:condition];
 }
 
 // min取得(1件)
-- (NSNumber *) minWithColumnName:(NSString *)columnName condition:(CFCoreDataCondition * __nonnull)condition
+- (NSNumber *) minWithColumnName:(NSString *)columnName condition:(CFCoreDataCondition *)condition
 {
     return [self numberFunctionWithFunctionName:kFunctionMin columnName:columnName condition:condition];
 }
 
 // average取得(1件)
-- (NSNumber *) averageWithColumnName:(NSString *)columnName condition:(CFCoreDataCondition * __nonnull)condition
+- (NSNumber *) averageWithColumnName:(NSString *)columnName condition:(CFCoreDataCondition *)condition
 {
     return [self numberFunctionWithFunctionName:kFunctionAverage columnName:columnName condition:condition];
 }
 
 // sum取得(1件)
-- (NSNumber *) sumWithColumnName:(NSString *)columnName condition:(CFCoreDataCondition * __nonnull)condition
+- (NSNumber *) sumWithColumnName:(NSString *)columnName condition:(CFCoreDataCondition *)condition
 {
     return [self numberFunctionWithFunctionName:kFunctionSum columnName:columnName condition:condition];
 }
