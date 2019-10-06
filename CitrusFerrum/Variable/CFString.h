@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+
+#if TARGET_OS_IOS
 #import <UIKit/UIKit.h>
+#endif
 
 #define CFStringf(format,...) [NSString stringWithFormat:format,##__VA_ARGS__]
 
@@ -34,7 +37,9 @@
 // NSDecimalNumberからNSStringに変更
 + (NSString *) stringWithDecimal:(NSDecimalNumber *)decimalValue;
 
+#if TARGET_OS_IOS
 // サイズ取得
 + (CGSize) sizeWithString:(NSString *)stringValue font:(UIFont *)font constrainedToSize:(CGSize)constrainedToSize;
+#endif
 
 @end

@@ -80,6 +80,7 @@
     return stringValue;
 }
 
+#if TARGET_OS_IOS
 // サイズ取得
 + (CGSize) sizeWithString:(NSString *)stringValue font:(UIFont *)font constrainedToSize:(CGSize)constrainedToSize
 {
@@ -102,5 +103,6 @@
     
     return size;
 }
+#endif
 
 @end
