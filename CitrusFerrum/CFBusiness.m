@@ -9,6 +9,7 @@
 #import "CFBusiness.h"
 
 #import "CFDate.h"
+#import "CFDateFormat.h"
 #import "CFString.h"
 
 
@@ -70,7 +71,7 @@
             }
             else if ([value isKindOfClass:[NSDate class]] == YES)
             {
-                value = [CFDate stringWithDate:value format:@"yyyyMMddHHmmss"];
+                value = [CFDateFormat stringWithDate:value format:@"yyyyMMddHHmmss"];
             }
             [result setObject:value forKey:column];
         }

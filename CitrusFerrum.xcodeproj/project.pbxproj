@@ -11,7 +11,6 @@
 		B422D5D5234A0A1600D1429A /* CitrusFerrumTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B422D5D4234A0A1600D1429A /* CitrusFerrumTests.m */; };
 		B422D613234A0A6F00D1429A /* CFHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B422D5E1234A0A6F00D1429A /* CFHttpRequest.m */; };
 		B422D614234A0A6F00D1429A /* CFHttpRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = B422D5E2234A0A6F00D1429A /* CFHttpRequest.h */; };
-		B422D615234A0A6F00D1429A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = B422D5E3234A0A6F00D1429A /* README.md */; };
 		B422D616234A0A6F00D1429A /* CFBusiness.m in Sources */ = {isa = PBXBuildFile; fileRef = B422D5E4234A0A6F00D1429A /* CFBusiness.m */; };
 		B422D617234A0A6F00D1429A /* CFObject.m in Sources */ = {isa = PBXBuildFile; fileRef = B422D5E5234A0A6F00D1429A /* CFObject.m */; };
 		B422D618234A0A6F00D1429A /* CFEmptyVL.m in Sources */ = {isa = PBXBuildFile; fileRef = B422D5E7234A0A6F00D1429A /* CFEmptyVL.m */; };
@@ -26,7 +25,6 @@
 		B422D621234A0A6F00D1429A /* CFTask.m in Sources */ = {isa = PBXBuildFile; fileRef = B422D5F1234A0A6F00D1429A /* CFTask.m */; };
 		B422D622234A0A6F00D1429A /* CFTaskNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B422D5F2234A0A6F00D1429A /* CFTaskNode.m */; };
 		B422D623234A0A6F00D1429A /* CitrusFerrum.h in Headers */ = {isa = PBXBuildFile; fileRef = B422D5F3234A0A6F00D1429A /* CitrusFerrum.h */; };
-		B422D624234A0A6F00D1429A /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B422D5F4234A0A6F00D1429A /* LICENSE */; };
 		B422D625234A0A6F00D1429A /* CFCoreDataCondition.h in Headers */ = {isa = PBXBuildFile; fileRef = B422D5F6234A0A6F00D1429A /* CFCoreDataCondition.h */; };
 		B422D626234A0A6F00D1429A /* CFCoreDataRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = B422D5F7234A0A6F00D1429A /* CFCoreDataRequest.h */; };
 		B422D627234A0A6F00D1429A /* CFCoreDataService.m in Sources */ = {isa = PBXBuildFile; fileRef = B422D5F8234A0A6F00D1429A /* CFCoreDataService.m */; };
@@ -43,16 +41,20 @@
 		B422D633234A0A6F00D1429A /* CFElement.h in Headers */ = {isa = PBXBuildFile; fileRef = B422D606234A0A6F00D1429A /* CFElement.h */; };
 		B422D634234A0A6F00D1429A /* CFString.m in Sources */ = {isa = PBXBuildFile; fileRef = B422D607234A0A6F00D1429A /* CFString.m */; };
 		B422D635234A0A6F00D1429A /* CFArray.h in Headers */ = {isa = PBXBuildFile; fileRef = B422D608234A0A6F00D1429A /* CFArray.h */; };
-		B422D636234A0A6F00D1429A /* CFDate.h in Headers */ = {isa = PBXBuildFile; fileRef = B422D609234A0A6F00D1429A /* CFDate.h */; };
+		B422D636234A0A6F00D1429A /* CFDate.h in Headers */ = {isa = PBXBuildFile; fileRef = B422D609234A0A6F00D1429A /* CFDate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B422D637234A0A6F00D1429A /* CFDecimal.m in Sources */ = {isa = PBXBuildFile; fileRef = B422D60A234A0A6F00D1429A /* CFDecimal.m */; };
 		B422D638234A0A6F00D1429A /* CFCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = B422D60B234A0A6F00D1429A /* CFCollection.h */; };
 		B422D639234A0A6F00D1429A /* CFElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B422D60C234A0A6F00D1429A /* CFElement.m */; };
 		B422D63A234A0A6F00D1429A /* CFFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = B422D60D234A0A6F00D1429A /* CFFormat.h */; };
 		B422D63B234A0A6F00D1429A /* CFArray.m in Sources */ = {isa = PBXBuildFile; fileRef = B422D60E234A0A6F00D1429A /* CFArray.m */; };
-		B422D63C234A0A6F00D1429A /* CFString.h in Headers */ = {isa = PBXBuildFile; fileRef = B422D60F234A0A6F00D1429A /* CFString.h */; };
+		B422D63C234A0A6F00D1429A /* CFString.h in Headers */ = {isa = PBXBuildFile; fileRef = B422D60F234A0A6F00D1429A /* CFString.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B422D63D234A0A6F00D1429A /* CFCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = B422D610234A0A6F00D1429A /* CFCollection.m */; };
 		B422D63E234A0A6F00D1429A /* CFDecimal.h in Headers */ = {isa = PBXBuildFile; fileRef = B422D611234A0A6F00D1429A /* CFDecimal.h */; };
 		B422D63F234A0A6F00D1429A /* CFDate.m in Sources */ = {isa = PBXBuildFile; fileRef = B422D612234A0A6F00D1429A /* CFDate.m */; };
+		B422D64F234A129000D1429A /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B422D64D234A129000D1429A /* LICENSE */; };
+		B422D650234A129000D1429A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = B422D64E234A129000D1429A /* README.md */; };
+		B449AB60234E32BB00509EE0 /* CFDateFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = B449AB5E234E32BA00509EE0 /* CFDateFormat.h */; };
+		B449AB61234E32BB00509EE0 /* CFDateFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = B449AB5F234E32BA00509EE0 /* CFDateFormat.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,7 +74,6 @@
 		B422D5D6234A0A1600D1429A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B422D5E1234A0A6F00D1429A /* CFHttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFHttpRequest.m; sourceTree = "<group>"; };
 		B422D5E2234A0A6F00D1429A /* CFHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFHttpRequest.h; sourceTree = "<group>"; };
-		B422D5E3234A0A6F00D1429A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B422D5E4234A0A6F00D1429A /* CFBusiness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFBusiness.m; sourceTree = "<group>"; };
 		B422D5E5234A0A6F00D1429A /* CFObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFObject.m; sourceTree = "<group>"; };
 		B422D5E7234A0A6F00D1429A /* CFEmptyVL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFEmptyVL.m; sourceTree = "<group>"; };
@@ -87,7 +88,6 @@
 		B422D5F1234A0A6F00D1429A /* CFTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFTask.m; sourceTree = "<group>"; };
 		B422D5F2234A0A6F00D1429A /* CFTaskNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFTaskNode.m; sourceTree = "<group>"; };
 		B422D5F3234A0A6F00D1429A /* CitrusFerrum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CitrusFerrum.h; sourceTree = "<group>"; };
-		B422D5F4234A0A6F00D1429A /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		B422D5F6234A0A6F00D1429A /* CFCoreDataCondition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFCoreDataCondition.h; sourceTree = "<group>"; };
 		B422D5F7234A0A6F00D1429A /* CFCoreDataRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFCoreDataRequest.h; sourceTree = "<group>"; };
 		B422D5F8234A0A6F00D1429A /* CFCoreDataService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFCoreDataService.m; sourceTree = "<group>"; };
@@ -115,6 +115,10 @@
 		B422D610234A0A6F00D1429A /* CFCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFCollection.m; sourceTree = "<group>"; };
 		B422D611234A0A6F00D1429A /* CFDecimal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFDecimal.h; sourceTree = "<group>"; };
 		B422D612234A0A6F00D1429A /* CFDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFDate.m; sourceTree = "<group>"; };
+		B422D64D234A129000D1429A /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		B422D64E234A129000D1429A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		B449AB5E234E32BA00509EE0 /* CFDateFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFDateFormat.h; sourceTree = "<group>"; };
+		B449AB5F234E32BA00509EE0 /* CFDateFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFDateFormat.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +143,8 @@
 		B422D5BC234A0A1600D1429A = {
 			isa = PBXGroup;
 			children = (
+				B422D64D234A129000D1429A /* LICENSE */,
+				B422D64E234A129000D1429A /* README.md */,
 				B422D5C8234A0A1600D1429A /* CitrusFerrum */,
 				B422D5D3234A0A1600D1429A /* CitrusFerrumTests */,
 				B422D5C7234A0A1600D1429A /* Products */,
@@ -166,10 +172,8 @@
 				B422D5F5234A0A6F00D1429A /* CoreData */,
 				B422D5E0234A0A6F00D1429A /* Http */,
 				B422D600234A0A6F00D1429A /* Info.plist */,
-				B422D5F4234A0A6F00D1429A /* LICENSE */,
 				B422D5E6234A0A6F00D1429A /* NVL */,
 				B422D601234A0A6F00D1429A /* Progress */,
-				B422D5E3234A0A6F00D1429A /* README.md */,
 				B422D5EE234A0A6F00D1429A /* Task */,
 				B422D604234A0A6F00D1429A /* Variable */,
 			);
@@ -245,20 +249,22 @@
 		B422D604234A0A6F00D1429A /* Variable */ = {
 			isa = PBXGroup;
 			children = (
-				B422D605234A0A6F00D1429A /* CFFormat.m */,
-				B422D606234A0A6F00D1429A /* CFElement.h */,
-				B422D607234A0A6F00D1429A /* CFString.m */,
 				B422D608234A0A6F00D1429A /* CFArray.h */,
-				B422D609234A0A6F00D1429A /* CFDate.h */,
-				B422D60A234A0A6F00D1429A /* CFDecimal.m */,
+				B422D60E234A0A6F00D1429A /* CFArray.m */,
 				B422D60B234A0A6F00D1429A /* CFCollection.h */,
+				B422D610234A0A6F00D1429A /* CFCollection.m */,
+				B422D609234A0A6F00D1429A /* CFDate.h */,
+				B422D612234A0A6F00D1429A /* CFDate.m */,
+				B449AB5E234E32BA00509EE0 /* CFDateFormat.h */,
+				B449AB5F234E32BA00509EE0 /* CFDateFormat.m */,
+				B422D611234A0A6F00D1429A /* CFDecimal.h */,
+				B422D60A234A0A6F00D1429A /* CFDecimal.m */,
+				B422D606234A0A6F00D1429A /* CFElement.h */,
 				B422D60C234A0A6F00D1429A /* CFElement.m */,
 				B422D60D234A0A6F00D1429A /* CFFormat.h */,
-				B422D60E234A0A6F00D1429A /* CFArray.m */,
+				B422D605234A0A6F00D1429A /* CFFormat.m */,
 				B422D60F234A0A6F00D1429A /* CFString.h */,
-				B422D610234A0A6F00D1429A /* CFCollection.m */,
-				B422D611234A0A6F00D1429A /* CFDecimal.h */,
-				B422D612234A0A6F00D1429A /* CFDate.m */,
+				B422D607234A0A6F00D1429A /* CFString.m */,
 			);
 			path = Variable;
 			sourceTree = "<group>";
@@ -270,22 +276,23 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B422D62D234A0A6F00D1429A /* CFObject.h in Headers */,
 				B422D62E234A0A6F00D1429A /* CitrusFerrumTypedef.h in Headers */,
+				B422D636234A0A6F00D1429A /* CFDate.h in Headers */,
+				B422D62D234A0A6F00D1429A /* CFObject.h in Headers */,
+				B422D63C234A0A6F00D1429A /* CFString.h in Headers */,
 				B422D631234A0A6F00D1429A /* CFProgress.h in Headers */,
 				B422D623234A0A6F00D1429A /* CitrusFerrum.h in Headers */,
 				B422D62A234A0A6F00D1429A /* CFCoreDataService.h in Headers */,
 				B422D635234A0A6F00D1429A /* CFArray.h in Headers */,
 				B422D626234A0A6F00D1429A /* CFCoreDataRequest.h in Headers */,
-				B422D636234A0A6F00D1429A /* CFDate.h in Headers */,
 				B422D625234A0A6F00D1429A /* CFCoreDataCondition.h in Headers */,
 				B422D614234A0A6F00D1429A /* CFHttpRequest.h in Headers */,
 				B422D63A234A0A6F00D1429A /* CFFormat.h in Headers */,
 				B422D61A234A0A6F00D1429A /* CFNVL.h in Headers */,
-				B422D63C234A0A6F00D1429A /* CFString.h in Headers */,
 				B422D62C234A0A6F00D1429A /* CFCoreDataManager.h in Headers */,
 				B422D63E234A0A6F00D1429A /* CFDecimal.h in Headers */,
 				B422D619234A0A6F00D1429A /* CFBoolVL.h in Headers */,
+				B449AB60234E32BB00509EE0 /* CFDateFormat.h in Headers */,
 				B422D638234A0A6F00D1429A /* CFCollection.h in Headers */,
 				B422D620234A0A6F00D1429A /* CFTaskNode.h in Headers */,
 				B422D61B234A0A6F00D1429A /* CFEmptyVL.h in Headers */,
@@ -375,8 +382,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B422D624234A0A6F00D1429A /* LICENSE in Resources */,
-				B422D615234A0A6F00D1429A /* README.md in Resources */,
+				B422D650234A129000D1429A /* README.md in Resources */,
+				B422D64F234A129000D1429A /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,6 +417,7 @@
 				B422D630234A0A6F00D1429A /* CFProgress.m in Sources */,
 				B422D634234A0A6F00D1429A /* CFString.m in Sources */,
 				B422D632234A0A6F00D1429A /* CFFormat.m in Sources */,
+				B449AB61234E32BB00509EE0 /* CFDateFormat.m in Sources */,
 				B422D63B234A0A6F00D1429A /* CFArray.m in Sources */,
 				B422D617234A0A6F00D1429A /* CFObject.m in Sources */,
 				B422D637234A0A6F00D1429A /* CFDecimal.m in Sources */,

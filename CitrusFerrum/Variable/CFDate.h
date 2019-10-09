@@ -10,6 +10,10 @@
 
 @interface CFDate : NSObject
 
+//
+// static public method
+//
+
 // 日付フォーマットを自動識別して取得
 + (NSDate *) dateWithString:(NSString *)stringValue;
 
@@ -21,18 +25,6 @@
 
 // 日付フォーマットからNSDateを取得(LOCALE指定/タイムゾーン指定)
 + (NSDate *) dateWithString:(NSString *)stringValue format:(NSString *)formatString locale:(NSLocale *)localeValue timeZone:(NSTimeZone *)timeZoneValue;
-
-// 日付フォーマットされた文字列を取得
-+ (NSString *) stringWithDate:(NSDate *)dateValue format:(NSString *)formatString;
-
-// 日付フォーマットされた文字列を取得(LOCALE指定)
-+ (NSString *) stringWithDate:(NSDate *)dateValue format:(NSString *)formatString locale:(NSLocale *)localeValue;
-
-// 日付フォーマットされた文字列を取得(LOCALE指定/タイムゾーン指定)
-+ (NSString *) stringWithDate:(NSDate *)dateValue format:(NSString *)formatString locale:(NSLocale *)localeValue timeZone:(NSTimeZone *)timeZoneValue;
-
-// タイムスタンプ文字列
-+ (NSString *) stringUnixTime:(NSDate *)dateValue;
 
 // タイムスタンプ文字列からNSDateに
 + (NSDate *) dateWithUnixTimeString:(NSString *)stringValue;

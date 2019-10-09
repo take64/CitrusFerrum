@@ -14,6 +14,11 @@
 
 @implementation CFDate
 
+#pragma mark - static public method
+//
+// static public method
+//
+
 // 日付フォーマットを自動識別して取得
 + (NSDate *) dateWithString:(NSString *)stringValue
 {
@@ -56,37 +61,6 @@
     NSDate *date = [formatter dateFromString:stringValue];
 
     return date;
-}
-
-// 日付フォーマットされた文字列を取得
-+ (NSString *) stringWithDate:(NSDate *)dateValue format:(NSString *)formatString
-{
-    return [self stringWithDate:dateValue format:formatString locale:[NSLocale currentLocale]];
-}
-
-// 日付フォーマットされた文字列を取得(LOCALE指定)
-+ (NSString *) stringWithDate:(NSDate *)dateValue format:(NSString *)formatString locale:(NSLocale *)localeValue
-{
-    return [self stringWithDate:dateValue format:formatString locale:localeValue timeZone:[NSTimeZone defaultTimeZone]];
-}
-
-// 日付フォーマットされた文字列を取得(LOCALE指定/タイムゾーン指定)
-+ (NSString *) stringWithDate:(NSDate *)dateValue format:(NSString *)formatString locale:(NSLocale *)localeValue timeZone:(NSTimeZone *)timeZoneValue
-{
-    // フォーマット
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setTimeZone:timeZoneValue];
-    [formatter setLocale:localeValue];
-    [formatter setDateFormat:formatString];
-
-    // 変換
-    return [formatter stringFromDate:dateValue];
-}
-
-// タイムスタンプ文字列
-+ (NSString *) stringUnixTime:(NSDate *)dateValue
-{
-    return [NSString stringWithFormat:@"%f", [dateValue timeIntervalSince1970]];
 }
 
 // タイムスタンプ文字列からNSDateに
