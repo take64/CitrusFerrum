@@ -10,8 +10,6 @@
 
 #import "CFEmptyVL.h"
 
-
-
 @implementation CFDecimalRounding
 
 #pragma mark - static public method
@@ -20,46 +18,46 @@
 //
 
 // 切り上げ、切り捨て、四捨五入
-+ (NSDecimalNumber *) decimalRoundingMode:(NSRoundingMode)roundingMode decimal:(NSDecimalNumber *)decimalValue scale:(NSUInteger)scale
++ (NSDecimalNumber *) roundingMode:(NSRoundingMode)roundingMode decimal:(NSDecimalNumber *)decimalValue scale:(NSUInteger)scale
 {
     NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:roundingMode scale:scale raiseOnExactness:YES raiseOnOverflow:YES raiseOnUnderflow:YES raiseOnDivideByZero:YES];
     return [decimalValue decimalNumberByRoundingAccordingToBehavior:handler];
 }
 
 // 切り上げ
-+ (NSDecimalNumber *) decimalRoundUpWithDecimal:(NSDecimalNumber *) decimalValue
++ (NSDecimalNumber *) upWithDecimal:(NSDecimalNumber *) decimalValue
 {
-    return [self decimalRoundingMode:NSRoundUp decimal:decimalValue scale:0];
+    return [self roundingMode:NSRoundUp decimal:decimalValue scale:0];
 }
 
 // 切り上げ
-+ (NSDecimalNumber *) decimalRoundUpWithDecimal:(NSDecimalNumber *) decimalValue scale:(NSUInteger)scale
++ (NSDecimalNumber *) upWithDecimal:(NSDecimalNumber *) decimalValue scale:(NSUInteger)scale
 {
-    return [self decimalRoundingMode:NSRoundUp decimal:decimalValue scale:scale];
+    return [self roundingMode:NSRoundUp decimal:decimalValue scale:scale];
 }
 
 // 切り捨て
-+ (NSDecimalNumber *) decimalRoundDownWithDecimal:(NSDecimalNumber *) decimalValue
++ (NSDecimalNumber *) downWithDecimal:(NSDecimalNumber *) decimalValue
 {
-    return [self decimalRoundingMode:NSRoundDown decimal:decimalValue scale:0];
+    return [self roundingMode:NSRoundDown decimal:decimalValue scale:0];
 }
 
 // 切り捨て
-+ (NSDecimalNumber *) decimalRoundDownWithDecimal:(NSDecimalNumber *) decimalValue scale:(NSUInteger)scale
++ (NSDecimalNumber *) downWithDecimal:(NSDecimalNumber *) decimalValue scale:(NSUInteger)scale
 {
-    return [self decimalRoundingMode:NSRoundDown decimal:decimalValue scale:scale];
+    return [self roundingMode:NSRoundDown decimal:decimalValue scale:scale];
 }
 
 // 四捨五入
-+ (NSDecimalNumber *) decimalRoundPlainWithDecimal:(NSDecimalNumber *) decimalValue
++ (NSDecimalNumber *) plainWithDecimal:(NSDecimalNumber *) decimalValue
 {
-    return [self decimalRoundingMode:NSRoundPlain decimal:decimalValue scale:0];
+    return [self roundingMode:NSRoundPlain decimal:decimalValue scale:0];
 }
 
 // 四捨五入
-+ (NSDecimalNumber *) decimalRoundPlainWithDecimal:(NSDecimalNumber *) decimalValue scale:(NSUInteger)scale
++ (NSDecimalNumber *) plainWithDecimal:(NSDecimalNumber *) decimalValue scale:(NSUInteger)scale
 {
-    return [self decimalRoundingMode:NSRoundPlain decimal:decimalValue scale:scale];
+    return [self roundingMode:NSRoundPlain decimal:decimalValue scale:scale];
 }
 
 @end
