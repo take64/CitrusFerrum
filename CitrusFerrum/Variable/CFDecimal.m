@@ -14,9 +14,9 @@
 
 @implementation CFDecimal
 
-#pragma mark - static method
+#pragma mark - static public method
 //
-// static method
+// static public method
 //
 
 // doubleからの変換
@@ -110,49 +110,6 @@
         return [NSDecimalNumber zero];
     }
     return [total decimalNumberByDividingBy:count];
-}
-
-// 切り上げ、切り捨て、四捨五入
-+ (NSDecimalNumber *) decimalRoundingMode:(NSRoundingMode)roundingMode decimal:(NSDecimalNumber *)decimalValue scale:(NSUInteger)scale
-{
-    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:roundingMode scale:scale raiseOnExactness:YES raiseOnOverflow:YES raiseOnUnderflow:YES raiseOnDivideByZero:YES];
-    return [decimalValue decimalNumberByRoundingAccordingToBehavior:handler];
-}
-
-// 切り上げ
-+ (NSDecimalNumber *) decimalRoundUpWithDecimal:(NSDecimalNumber *) decimalValue
-{
-    return [self decimalRoundingMode:NSRoundUp decimal:decimalValue scale:0];
-}
-
-// 切り上げ
-+ (NSDecimalNumber *) decimalRoundUpWithDecimal:(NSDecimalNumber *) decimalValue scale:(NSUInteger)scale
-{
-    return [self decimalRoundingMode:NSRoundUp decimal:decimalValue scale:scale];
-}
-
-// 切り捨て
-+ (NSDecimalNumber *) decimalRoundDownWithDecimal:(NSDecimalNumber *) decimalValue
-{
-    return [self decimalRoundingMode:NSRoundDown decimal:decimalValue scale:0];
-}
-
-// 切り捨て
-+ (NSDecimalNumber *) decimalRoundDownWithDecimal:(NSDecimalNumber *) decimalValue scale:(NSUInteger)scale
-{
-    return [self decimalRoundingMode:NSRoundDown decimal:decimalValue scale:scale];
-}
-
-// 四捨五入
-+ (NSDecimalNumber *) decimalRoundPlainWithDecimal:(NSDecimalNumber *) decimalValue
-{
-    return [self decimalRoundingMode:NSRoundPlain decimal:decimalValue scale:0];
-}
-
-// 四捨五入
-+ (NSDecimalNumber *) decimalRoundPlainWithDecimal:(NSDecimalNumber *) decimalValue scale:(NSUInteger)scale
-{
-    return [self decimalRoundingMode:NSRoundPlain decimal:decimalValue scale:scale];
 }
 
 @end
