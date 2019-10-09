@@ -55,6 +55,8 @@
 		B422D650234A129000D1429A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = B422D64E234A129000D1429A /* README.md */; };
 		B449AB60234E32BB00509EE0 /* CFDateFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = B449AB5E234E32BA00509EE0 /* CFDateFormat.h */; };
 		B449AB61234E32BB00509EE0 /* CFDateFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = B449AB5F234E32BA00509EE0 /* CFDateFormat.m */; };
+		B449AB64234E3ACE00509EE0 /* CFDecimalRounding.m in Sources */ = {isa = PBXBuildFile; fileRef = B449AB62234E3ACE00509EE0 /* CFDecimalRounding.m */; };
+		B449AB65234E3ACE00509EE0 /* CFDecimalRounding.h in Headers */ = {isa = PBXBuildFile; fileRef = B449AB63234E3ACE00509EE0 /* CFDecimalRounding.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +121,8 @@
 		B422D64E234A129000D1429A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B449AB5E234E32BA00509EE0 /* CFDateFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFDateFormat.h; sourceTree = "<group>"; };
 		B449AB5F234E32BA00509EE0 /* CFDateFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFDateFormat.m; sourceTree = "<group>"; };
+		B449AB62234E3ACE00509EE0 /* CFDecimalRounding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFDecimalRounding.m; sourceTree = "<group>"; };
+		B449AB63234E3ACE00509EE0 /* CFDecimalRounding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFDecimalRounding.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,6 +263,8 @@
 				B449AB5F234E32BA00509EE0 /* CFDateFormat.m */,
 				B422D611234A0A6F00D1429A /* CFDecimal.h */,
 				B422D60A234A0A6F00D1429A /* CFDecimal.m */,
+				B449AB63234E3ACE00509EE0 /* CFDecimalRounding.h */,
+				B449AB62234E3ACE00509EE0 /* CFDecimalRounding.m */,
 				B422D606234A0A6F00D1429A /* CFElement.h */,
 				B422D60C234A0A6F00D1429A /* CFElement.m */,
 				B422D60D234A0A6F00D1429A /* CFFormat.h */,
@@ -291,6 +297,7 @@
 				B422D61A234A0A6F00D1429A /* CFNVL.h in Headers */,
 				B422D62C234A0A6F00D1429A /* CFCoreDataManager.h in Headers */,
 				B422D63E234A0A6F00D1429A /* CFDecimal.h in Headers */,
+				B449AB65234E3ACE00509EE0 /* CFDecimalRounding.h in Headers */,
 				B422D619234A0A6F00D1429A /* CFBoolVL.h in Headers */,
 				B449AB60234E32BB00509EE0 /* CFDateFormat.h in Headers */,
 				B422D638234A0A6F00D1429A /* CFCollection.h in Headers */,
@@ -403,6 +410,7 @@
 			files = (
 				B422D618234A0A6F00D1429A /* CFEmptyVL.m in Sources */,
 				B422D622234A0A6F00D1429A /* CFTaskNode.m in Sources */,
+				B449AB64234E3ACE00509EE0 /* CFDecimalRounding.m in Sources */,
 				B422D627234A0A6F00D1429A /* CFCoreDataService.m in Sources */,
 				B422D629234A0A6F00D1429A /* CFCoreDataCondition.m in Sources */,
 				B422D628234A0A6F00D1429A /* CFCoreDataManager.m in Sources */,
