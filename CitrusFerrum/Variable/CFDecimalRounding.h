@@ -15,24 +15,24 @@
 //
 
 // 切り上げ、切り捨て、四捨五入
-+ (NSDecimalNumber *) decimalRoundingMode:(NSRoundingMode)roundingMode decimal:(NSDecimalNumber *)decimalValue scale:(NSUInteger)scale;
++ (NSDecimalNumber *) roundingMode:(NSRoundingMode)roundingMode decimal:(NSDecimalNumber *)decimalValue scale:(NSUInteger)scale;
 
 // 切り上げ
-+ (NSDecimalNumber *) decimalRoundUpWithDecimal:(NSDecimalNumber *) decimalValue;
++ (NSDecimalNumber *) upWithDecimal:(NSDecimalNumber *) decimalValue;
 
 // 切り上げ
-+ (NSDecimalNumber *) decimalRoundUpWithDecimal:(NSDecimalNumber *) decimalValue scale:(NSUInteger)scale;
++ (NSDecimalNumber *) upWithDecimal:(NSDecimalNumber *) decimalValue scale:(NSUInteger)scale;
 
 // 切り捨て
-+ (NSDecimalNumber *) decimalRoundDownWithDecimal:(NSDecimalNumber *) decimalValue;
++ (NSDecimalNumber *) downWithDecimal:(NSDecimalNumber *) decimalValue;
 
 // 切り捨て
-+ (NSDecimalNumber *) decimalRoundDownWithDecimal:(NSDecimalNumber *) decimalValue scale:(NSUInteger)scale;
++ (NSDecimalNumber *) downWithDecimal:(NSDecimalNumber *) decimalValue scale:(NSUInteger)scale;
 
 // 四捨五入
-+ (NSDecimalNumber *) decimalRoundPlainWithDecimal:(NSDecimalNumber *) decimalValue;
++ (NSDecimalNumber *) plainWithDecimal:(NSDecimalNumber *) decimalValue;
 
 // 四捨五入
-+ (NSDecimalNumber *) decimalRoundPlainWithDecimal:(NSDecimalNumber *) decimalValue scale:(NSUInteger)scale;
++ (NSDecimalNumber *) plainWithDecimal:(NSDecimalNumber *) decimalValue scale:(NSUInteger)scale;
 
 @end
